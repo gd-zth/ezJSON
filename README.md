@@ -60,7 +60,7 @@
           
       } student;
 
-  } INFO;
+  } INFO, pINFO;
 ```
 
 ### 通过cJSON构建

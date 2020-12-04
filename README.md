@@ -5,7 +5,8 @@ C语言下的人性化、轻量级、高性能JSON库
 <hr style=" border:solid; width:100px; height:1px;" color=#000000 size=1">
 
 # 性能测试
-<font color=#999AAA >测试使用的数据如下：
+这里使用目前主流的C语言JSON库 “cJSON” 做对比测试
+<font color=#999AAA >测试数据：
 ```
 {
     "school": "Guangdong University Of Petrochemical Technology",
@@ -36,7 +37,7 @@ C语言下的人性化、轻量级、高性能JSON库
 ```
 
 
-##  /* 构建JSON示例 */
+## 构建JSON示例
 
 ```
 	ezJSON(string)

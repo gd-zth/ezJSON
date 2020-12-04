@@ -38,7 +38,7 @@
 ```
 <font color=#999AAA >存储解析的数据：
 ```
-typedef struct INFOSTRUCT 
+  typedef struct INFOSTRUCT 
   {
       char    school[64];
       char    location[16];

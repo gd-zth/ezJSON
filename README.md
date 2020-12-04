@@ -9,64 +9,67 @@
 
 > ### 测试内容：
 ```
-/* 构建与解析目标 */
+	/* 构建与解析目标 */
+
 {
-    "school": "Guangdong University Of Petrochemical Technology",
-    "location": "Maoming",
-    "ranking": 505,
-    "area": 2020.643,
-    "student": {
+	"school": "Guangdong University Of Petrochemical Technology",
+	"location": "Maoming",
+	"ranking": 505,
+	"area": 2020.643,
+	"student": {
 	"name": "zhoutianhao",
 	"age": 23,
 	"grades": [
-	    97,
-	    62,
-	    84
+	97,
+	62,
+	84
 	],
 	"office": true,
 	"exp": [
-	    {
-		"address": "Guangdong",
-		"date": 1906
-	    },
-	    {
-		"address": "Chengdu",
-		"date": 1910
-	    }
+	{
+	"address": "Guangdong",
+	"date": 1906
+	},
+	{
+	"address": "Chengdu",
+	"date": 1910
+	}
 	]
-    }
+	}
 }
 
-/* 解析存储的数据 */
-typedef struct INFOSTRUCT 
-{
-    char    school[64];
-    char    location[16];
-    float   ranking;
-    float   area;
-    struct {
-        char    name[16];
-        float   age;
-        float   grades[3];
-        int     office;
-        struct {
-            char    address[16];
-            float   date;
-        } exp[2];
-    } student;
-} INFO;
+    /* 解析存储的数据 */
 
-/* 构建引用的数据 */
-char school[] = "Guangdong University Of Petrochemical Technology";
-char location[] = "Maoming";
-float ranking = 505;
-float area = 2020.643;
-char student_name[] = "zhoutianhao";
-float student_age = 23;
-float student_grades[] = {97, 62, 84};
-int student_office = 1;
-char *student_exp_address[] = {"Guangdong", "Chengdu"};
-float student_exp_date[] = {1906, 1910};
+    typedef struct INFOSTRUCT 
+    {
+        char    school[64];
+        char    location[16];
+        float   ranking;
+        float   area;
+        struct {
+            char    name[16];
+            float   age;
+            float   grades[3];
+            int     office;
+            struct {
+                char    address[16];
+                float   date;
+            } exp[2];
+        } student;
+    } INFO;
+
+    /* 构建引用的数据 */
+
+    char school[] = "Guangdong University Of Petrochemical Technology";
+    char location[] = "Maoming";
+    float ranking = 505;
+    float area = 2020.643;
+    char student_name[] = "zhoutianhao";
+    float student_age = 23;
+    float student_grades[] = {97, 62, 84};
+    int student_office = 1;
+    char *student_exp_address[] = {"Guangdong", "Chengdu"};
+    float student_exp_date[] = {1906, 1910};
 
 ```
 

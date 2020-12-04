@@ -4,7 +4,7 @@
 <hr style=" border:solid; width:100px; height:1px;" color=#000000 size=1">
 
 ## 一、对比测试
-<font color=#999AAA >这里使用目前主流的C语言库 “cJSON” 对比测试基本的数据构建与解析，从代码阅读性、构建与解析速度、运行内存进行比较。
+<font color=#999AAA >这里以目前在C语言下最主流的JSON库：cJSON 为例，从代码阅读性、构建与解析速度、运行内存进行比较。
 
 ### 测试内容
 > <font color=#999AAA >目标字符串：

@@ -45,16 +45,21 @@
       char    location[16];
       float   ranking;
       float   area;
+  
       struct {
           char    name[16];
           float   age;
           float   grades[3];
           int     office;
+          
           struct {
               char    address[16];
               float   date;
+              
           } exp[2];
+          
       } student;
+
   } INFO;
 ```
 

@@ -6,30 +6,62 @@ C语言下的人性化、轻量级、高性能JSON库
 
 @[TOC](目录)
 
-# 一、示例
+# 性能测试
+<font color=#999AAA >测试使用的数据如下：
+```
+	{
+	    "school": "Guangdong University Of Petrochemical Technology",
+	    "location": "Maoming",
+	    "ranking": 505,
+	    "area": 2020.643,
+	    "student": {
+	        "name": "zhoutianhao",
+	        "age": 23,
+	        "grades": [
+	            97,
+	            62,
+	            84
+	        ],
+	        "office": true,
+	        "exp": [
+	            {
+	                "address": "Guangdong",
+	                "date": 1906
+	            },
+	            {
+	                "address": "Chengdu",
+	                "date": 1910
+	            }
+	        ]
+	    }
+	}
+```
+
+##  /* 构建JSON示例 */
+
 ```c
-    ezJSON(string)
-    {
-        STR("school", "Guangdong University Of Petrochemical Technology");
-        STR("location", "Maoming");
-        NUM("ranking", 505);
-        NUM("area", 2020.643);
-        OBJ("student")
-        {
-            STR("name", "zhoutianhao");
-            NUM("age", 23);
-            ARR("grades", 3)
-            {
-                NUM(NULL, grades[_IDX]);
-            }}
-            BOL("office", 1);
-            ARR("exp", 2) {OBJ(NULL)
-            {
-                STR("address", address[_IDX]);
-                NUM("date", date[_IDX]);
-            }}}}
-        }}
-    }}
+	ezJSON(string)
+	{
+	    STR("school", "Guangdong University Of Petrochemical Technology");
+	    STR("location", "Maoming");
+	    NUM("ranking", 505);
+	    NUM("area", 2020.643);
+	    OBJ("student")
+	    {
+	        STR("name", "zhoutianhao");
+	        NUM("age", 23);
+	        ARR("grades", 3)
+	        {
+	            NUM(NULL, grades[_IDX]);
+	        }}
+	        BOL("office", 1);
+	        ARR("exp", 2) {OBJ(NULL)
+	        {
+	            STR("address", address[_IDX]);
+	            NUM("date", date[_IDX]);
+	        }}}}
+	    }}
+	}}
 ```
 <font color=#999AAA >示例：pandas 是基于NumPy 的一种工具，该工具是为了解决数据分析任务而创建的。
 

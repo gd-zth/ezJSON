@@ -121,8 +121,8 @@
           BOL("office", student_office);
           ARR("exp", 2) {OBJ(NULL)
           {
-              STR("address",  student_exp_address[_IDX]);
-              NUM("date",     student_exp_date[_IDX]);
+              STR("address", student_exp_address[_IDX]);
+              NUM("date",    student_exp_date[_IDX]);
           }}}}
       }}
   }}
@@ -155,6 +155,8 @@
       sprintf(info.student.exp[idx].address, "%s", cJSON_GetObjectItem(expItem, "address")->valuestring);
       info.student.exp[idx].date = cJSON_GetObjectItem(expItem, "date")->valuedouble;
   }
+  
+  cJSON_Delete(info);
 ```
 
 ## 通过ezJSON解析
@@ -162,15 +164,15 @@
 ```
   _ezJSON(err, string)
   {
-      _VAL("school", info.school);
+      _VAL("school",   info.school);
       _VAL("location", info.location);
-      _VAL("ranking", info.ranking);
-      _VAL("area", info.area);
+      _VAL("ranking",  info.ranking);
+      _VAL("area",     info.area);
 
       _OBJ("student") 
       {
-          _VAL("name", info.student.name);
-          _VAL("age", info.student.age);
+          _VAL("name",   info.student.name);
+          _VAL("age",    info.student.age);
           _VAL("office", info.student.office);
           _ARR("grades")
           {
@@ -180,7 +182,7 @@
           _ARR("exp") {_OBJ(NULL)
           {
               _VAL("address", info.student.exp[_IDX].address);
-              _VAL("date", info.student.exp[_IDX].date);
+              _VAL("date",    info.student.exp[_IDX].date);
           }}}}
       }}
   }}

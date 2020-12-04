@@ -1,14 +1,12 @@
 
 # ezJSON
 <font color=#999AAA >C语言下的人性化、轻量级、高性能JSON库
-
 <hr style=" border:solid; width:100px; height:1px;" color=#000000 size=1">
 
 # 性能测试
 <font color=#999AAA >这里使用目前主流的C语言JSON库 “cJSON” 对比测试基本的数据构建与解析。
 
 ## 测试内容
-
 <font color=#999AAA >构建与解析目标：
 ```
 {
@@ -131,9 +129,6 @@ ezJSON(string)
     }}
 }}
 ```
-
-
-
 
 <font color=#999AAA >示例：pandas 是基于NumPy 的一种工具，该工具是为了解决数据分析任务而创建的。
 

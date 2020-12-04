@@ -1,8 +1,6 @@
-# 前言
 
-#### 什么是ezJSON?
-
-<font color=#999AAA >提示：以下是本篇文章正文内容，下面案例可供参考
+# ezJSON
+C语言下的人性化、轻量级、高性能JSON库
 
 <hr style=" border:solid; width:100px; height:1px;" color=#000000 size=1">
 

@@ -128,6 +128,34 @@ typedef struct INFOSTRUCT
   }}
 ```
 
+### 通过cJSON解析
+```
+  cJSON* cinfo = cJSON_Parse(string);
+
+  sprintf(info.school, "%s", cJSON_GetObjectItem(cinfo, "school")->valuestring);
+  sprintf(info.location, "%s", cJSON_GetObjectItem(cinfo, "location")->valuestring);
+  info.ranking = cJSON_GetObjectItem(cinfo, "ranking")->valuedouble;
+  info.area = cJSON_GetObjectItem(cinfo, "area")->valuedouble;
+
+  cJSON* student = cJSON_GetObjectItem(cinfo, "student");
+  sprintf(info.student.name, "%s", cJSON_GetObjectItem(student, "name")->valuestring);
+  info.student.age = cJSON_GetObjectItem(student, "age")->valuedouble;
+  cJSON *grades = cJSON_GetObjectItem(student, "grades");
+  for (int idx; idx < cJSON_GetArraySize(grades); idx ++)
+  {
+      info.student.grades[idx] = cJSON_GetArrayItem(grades, idx)->valuedouble;
+  }
+  info.student.office = cJSON_GetObjectItem(student, "office")->valueint;
+
+  cJSON *exp = cJSON_GetObjectItem(student, "exp");
+  for (int idx; idx < cJSON_GetArraySize(exp); idx ++)
+  {
+      cJSON *expItem = cJSON_GetArrayItem(exp, idx);
+      sprintf(info.student.exp[idx].address, "%s", cJSON_GetObjectItem(expItem, "address")->valuestring);
+      info.student.exp[idx].date = cJSON_GetObjectItem(expItem, "date")->valuedouble;
+  }
+```
+
 ### 通过ezJSON解析
 代码如下（示例）：
 ```

@@ -60,16 +60,16 @@
 
     /* 构建引用的数据 */
 
-    char school[] = "Guangdong University Of Petrochemical Technology";
-    char location[] = "Maoming";
-    float ranking = 505;
-    float area = 2020.643;
-    char student_name[] = "zhoutianhao";
-    float student_age = 23;
-    float student_grades[] = {97, 62, 84};
-    int student_office = 1;
-    char *student_exp_address[] = {"Guangdong", "Chengdu"};
-    float student_exp_date[] = {1906, 1910};
+    char    school[]    = "Guangdong University Of Petrochemical Technology";
+    char    location[]  = "Maoming";
+    float   ranking     = 505;
+    float   area        = 2020.643;
+    char    student_name[]      = "zhoutianhao";
+    float   student_age         = 23;
+    float   student_grades[]    = {97, 62, 84};
+    int     student_office      = 1;
+    char*   student_exp_address[]   = {"Guangdong", "Chengdu"};
+    float   student_exp_date[]      = {1906, 1910};
 
 ```
 

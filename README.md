@@ -75,34 +75,35 @@
 
 >### 通过cJSON构建
 ```
-    cJSON *school = cJSON_CreateObject();
-    cJSON_AddStringToObject(school, "school", "Guangdong University Of Petrochemical Technology");
-    cJSON_AddStringToObject(school, "location", "Maoming");
-    cJSON_AddNumberToObject(school, "raning", 505);
-    cJSON_AddNumberToObject(school, "area", 2020.643);
+    cJSON *info = cJSON_CreateObject();
+    cJSON_AddStringToObject(info, "school", school);
+    cJSON_AddStringToObject(info, "location", location);
+    cJSON_AddNumberToObject(info, "ranking", ranking);
+    cJSON_AddNumberToObject(info, "area", area);
 
     cJSON *student = cJSON_CreateObject();
-    cJSON_AddStringToObject(student, "name", "zhoutianhao");
-    cJSON_AddNumberToObject(student, "age", 23);
+    cJSON_AddStringToObject(student, "name", student_name);
+    cJSON_AddNumberToObject(student, "age", student_age);
 
-    cJSON *grades = cJSON_CreateFloatArray(Grades, 3);
+    cJSON *grades = cJSON_CreateFloatArray(student_grades, 3);
     cJSON_AddItemToObject(student, "grades", grades);
     
-    cJSON_AddBoolToObject(student, "office", 1);
+    cJSON_AddBoolToObject(student, "office", student_office);
 
     cJSON *exp = cJSON_CreateArray();
     for (int idx = 0; idx <2 ; idx ++) 
     {
         cJSON *expItem = cJSON_CreateObject();
-        cJSON_AddStringToObject(expItem, "address", address[idx]);
-        cJSON_AddNumberToObject(expItem, "date", date[idx]);
+        cJSON_AddStringToObject(expItem, "address", student_exp_address[idx]);
+        cJSON_AddNumberToObject(expItem, "date", student_exp_date[idx]);
         cJSON_AddItemToArray(exp, expItem);
     }
     cJSON_AddItemToObject(student, "exp", exp);
 
-    cJSON_AddItemToObject(school, "student", student);
-        
+    cJSON_AddItemToObject(info, "student", student);
+
     cJSON_Delete(info);
+
 ```
 
 >### 通过ezJSON构建
@@ -110,26 +111,27 @@
 ```
     ezJSON(string)
     {
-        STR("school", "Guangdong University Of Petrochemical Technology");
-        STR("location", "Maoming");
-        NUM("ranking", 505);
-        NUM("area", 2020.643);
+        STR("school",   school);
+        STR("location", location);
+        NUM("ranking",  ranking);
+        NUM("area",     area);
         OBJ("student")
         {
-            STR("name", "zhoutianhao");
-            NUM("age", 23);
+            STR("name", student_name);
+            NUM("age",  student_age);
             ARR("grades", 3)
             {
                 NUM(NULL, grades[_IDX]);
             }}
-            BOL("office", 1);
+            BOL("office", student_office);
             ARR("exp", 2) {OBJ(NULL)
             {
-                STR("address", address[_IDX]);
-	        NUM("date", date[_IDX]);
+                STR("address",  student_exp_address[_IDX]);
+                NUM("date",     student_exp_date[_IDX]);
             }}}}
         }}
     }}
+
 ```
 
 

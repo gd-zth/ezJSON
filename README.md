@@ -7,7 +7,7 @@
 <font color=#999AAA >这里使用目前主流的C语言库 “cJSON” 对比测试基本的数据构建与解析，从代码阅读性、构建与解析速度、运行内存进行比较。
 
 ### 测试内容
-> <font color=#999AAA >构建与解析的目标字符串：
+> <font color=#999AAA >目标字符串：
 ```
   {
       "school": "Guangdong University Of Petrochemical Technology",
@@ -37,22 +37,7 @@
   }
 ```
 
-> <font color=#999AAA >获取待解析字符串的代码段：
-```
-  char string[1024];
-
-  FILE *pFile = fopen("test.json", "r");
-
-  fseek(pFile, 0L, SEEK_END);
-  long lenFile = ftell(pFile);
-  fseek(pFile, 0L, SEEK_SET);
-
-  string[fread(string, 1, lenFile, pFile)] = '\0';
-
-  fclose(pFile);
-```
-
-> <font color=#999AAA >存储解析数据的结构体：
+> <font color=#999AAA >目标结构体：
 ```
   typedef struct INFOSTRUCT 
   {
@@ -71,20 +56,6 @@
           } exp[2];
       } student;
   } INFO;
-```
-
-> <font color=#999AAA >用于构建字符串的变量：
-```
-  char    school[]    = "Guangdong University Of Petrochemical Technology";
-  char    location[]  = "Maoming";
-  float   ranking     = 505;
-  float   area        = 2020.643;
-  char    student_name[]      = "zhoutianhao";
-  float   student_age         = 23;
-  float   student_grades[]    = {97, 62, 84};
-  int     student_office      = 1;
-  char*   student_exp_address[]   = {"Guangdong", "Chengdu"};
-  float   student_exp_date[]      = {1906, 1910};
 ```
 
 ### 通过cJSON构建

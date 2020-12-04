@@ -1,12 +1,36 @@
 
 # ezJSON
-C语言下人性化、轻量级、高性能的JSON库
+C语言下的人性化、轻量级、高性能JSON库
 
 <hr style=" border:solid; width:100px; height:1px;" color=#000000 size=1">
 
-# 一、pandas是什么？
+@[TOC](目录)
 
-
+# 一、示例
+```c
+    ezJSON(string)
+    {
+        STR("school", "Guangdong University Of Petrochemical Technology");
+        STR("location", "Maoming");
+        NUM("ranking", 505);
+        NUM("area", 2020.643);
+        OBJ("student")
+        {
+            STR("name", "zhoutianhao");
+            NUM("age", 23);
+            ARR("grades", 3)
+            {
+                NUM(NULL, grades[_IDX]);
+            }}
+            BOL("office", 1);
+            ARR("exp", 2) {OBJ(NULL)
+            {
+                STR("address", address[_IDX]);
+                NUM("date", date[_IDX]);
+            }}}}
+        }}
+    }}
+```
 <font color=#999AAA >示例：pandas 是基于NumPy 的一种工具，该工具是为了解决数据分析任务而创建的。
 
 

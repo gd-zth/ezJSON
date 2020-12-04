@@ -128,9 +128,37 @@ typedef struct INFOSTRUCT
   }}
 ```
 
+### 通过ezJSON解析
+代码如下（示例）：
+```
+  _ezJSON(err, string)
+  {
+      _VAL("school", info.school);
+      _VAL("location", info.location);
+      _VAL("ranking", info.ranking);
+      _VAL("area", info.area);
+
+      _OBJ("student") 
+      {
+          _VAL("name", info.student.name);
+          _VAL("age", info.student.age);
+          _VAL("office", info.student.office);
+          _ARR("grades")
+          {
+              _VAL(NULL, info.student.grades[_IDX]);
+          }}
+
+          _ARR("exp") {_OBJ(NULL)
+          {
+              _VAL("address", info.student.exp[_IDX].address);
+              _VAL("date", info.student.exp[_IDX].date);
+          }}}}
+      }}
+  }}
+```
+
+
 <font color=#999AAA >示例：pandas 是基于NumPy 的一种工具，该工具是为了解决数据分析任务而创建的。
-
-
 
 # 二、使用步骤
 ## 1.引入库

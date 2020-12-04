@@ -108,28 +108,28 @@
 >### 通过ezJSON构建
 
 ```
-	ezJSON(string)
-	{
-	    STR("school", "Guangdong University Of Petrochemical Technology");
-	    STR("location", "Maoming");
-	    NUM("ranking", 505);
-	    NUM("area", 2020.643);
-	    OBJ("student")
-	    {
-	        STR("name", "zhoutianhao");
-	        NUM("age", 23);
-	        ARR("grades", 3)
-	        {
-	            NUM(NULL, grades[_IDX]);
-	        }}
-	        BOL("office", 1);
-	        ARR("exp", 2) {OBJ(NULL)
-	        {
-	            STR("address", address[_IDX]);
-	            NUM("date", date[_IDX]);
-	        }}}}
-	    }}
-	}}
+    ezJSON(string)
+    {
+        STR("school", "Guangdong University Of Petrochemical Technology");
+        STR("location", "Maoming");
+        NUM("ranking", 505);
+        NUM("area", 2020.643);
+        OBJ("student")
+        {
+            STR("name", "zhoutianhao");
+            NUM("age", 23);
+            ARR("grades", 3)
+            {
+                NUM(NULL, grades[_IDX]);
+            }}
+            BOL("office", 1);
+            ARR("exp", 2) {OBJ(NULL)
+            {
+                STR("address", address[_IDX]);
+	        NUM("date", date[_IDX]);
+            }}}}
+        }}
+    }}
 ```
 
 

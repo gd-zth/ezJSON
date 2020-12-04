@@ -36,7 +36,7 @@
       }
   }
 ```
-<font color=#999AAA >存储解析的数据：
+<font color=#999AAA >解析使用：
 ```
   typedef struct INFOSTRUCT 
   {
@@ -56,7 +56,24 @@
       } student;
   } INFO;
 ```
-<font color=#999AAA >构建使用的数据：
+
+<font color=#999AAA >解析使用：
+```
+  char string[1024];
+  INFO info;
+
+  FILE *pFile = fopen("test.json", "r");
+
+  fseek(pFile, 0L, SEEK_END);
+  long lenFile = ftell(pFile);
+  fseek(pFile, 0L, SEEK_SET);
+
+  string[fread(string, 1, lenFile, pFile)] = '\0';
+
+  fclose(pFile);
+```
+
+<font color=#999AAA >构建使用：
 ```
   char    strig[1024];
   char    school[]    = "Guangdong University Of Petrochemical Technology";

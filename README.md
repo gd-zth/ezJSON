@@ -58,7 +58,7 @@ typedef struct INFOSTRUCT
 ```
 <font color=#999AAA >构建引用的数据：
 ```
-  char    strig[1224];
+  char    strig[1024];
   
   char    school[]    = "Guangdong University Of Petrochemical Technology";
   char    location[]  = "Maoming";

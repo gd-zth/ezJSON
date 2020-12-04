@@ -7,37 +7,38 @@ C语言下的人性化、轻量级、高性能JSON库
 # 性能测试
 <font color=#999AAA >测试使用的数据如下：
 ```
-	{
-	    "school": "Guangdong University Of Petrochemical Technology",
-	    "location": "Maoming",
-	    "ranking": 505,
-	    "area": 2020.643,
-	    "student": {
-	        "name": "zhoutianhao",
-	        "age": 23,
-	        "grades": [
-	            97,
-	            62,
-	            84
-	        ],
-	        "office": true,
-	        "exp": [
-	            {
-	                "address": "Guangdong",
-	                "date": 1906
-	            },
-	            {
-	                "address": "Chengdu",
-	                "date": 1910
-	            }
-	        ]
+{
+    "school": "Guangdong University Of Petrochemical Technology",
+    "location": "Maoming",
+    "ranking": 505,
+    "area": 2020.643,
+    "student": {
+	"name": "zhoutianhao",
+	"age": 23,
+	"grades": [
+	    97,
+	    62,
+	    84
+	],
+	"office": true,
+	"exp": [
+	    {
+		"address": "Guangdong",
+		"date": 1906
+	    },
+	    {
+		"address": "Chengdu",
+		"date": 1910
 	    }
-	}
+	]
+    }
+}
 ```
+
 
 ##  /* 构建JSON示例 */
 
-```c
+```
 	ezJSON(string)
 	{
 	    STR("school", "Guangdong University Of Petrochemical Technology");

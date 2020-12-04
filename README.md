@@ -37,6 +37,35 @@
 }
 ```
 
+>### 通过cJSON构建
+```
+    cJSON *school = cJSON_CreateObject();
+    cJSON_AddStringToObject(school, "school", "Guangdong University Of Petrochemical Technology");
+    cJSON_AddStringToObject(school, "location", "Maoming");
+    cJSON_AddNumberToObject(school, "raning", 505);
+    cJSON_AddNumberToObject(school, "area", 2020.643);
+
+    cJSON *student = cJSON_CreateObject();
+    cJSON_AddStringToObject(student, "name", "zhoutianhao");
+    cJSON_AddNumberToObject(student, "age", 23);
+
+    cJSON *grades = cJSON_CreateFloatArray(Grades, 3);
+    cJSON_AddItemToObject(student, "grades", grades);
+    
+    cJSON_AddBoolToObject(student, "office", 1);
+
+    cJSON *exp = cJSON_CreateArray();
+    for (int idx = 0; idx <2 ; idx ++) 
+    {
+        cJSON *expItem = cJSON_CreateObject();
+        cJSON_AddStringToObject(expItem, "address", address[idx]);
+        cJSON_AddNumberToObject(expItem, "date", date[idx]);
+        cJSON_AddItemToArray(exp, expItem);
+    }
+    cJSON_AddItemToObject(student, "exp", exp);
+
+    cJSON_AddItemToObject(school, "student", student);
+```
 
 >### 通过ezJSON构建
 
@@ -65,7 +94,6 @@
 	}}
 ```
 
->### 通过cJSON构建
 
 
 

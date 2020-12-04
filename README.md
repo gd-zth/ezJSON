@@ -58,6 +58,8 @@ typedef struct INFOSTRUCT
 ```
 <font color=#999AAA >构建引用的数据：
 ```
+  char    strig[1224];
+  
   char    school[]    = "Guangdong University Of Petrochemical Technology";
   char    location[]  = "Maoming";
   float   ranking     = 505;
@@ -82,12 +84,9 @@ typedef struct INFOSTRUCT
   cJSON *student = cJSON_CreateObject();
   cJSON_AddStringToObject(student, "name", student_name);
   cJSON_AddNumberToObject(student, "age", student_age);
-
   cJSON *grades = cJSON_CreateFloatArray(student_grades, 3);
   cJSON_AddItemToObject(student, "grades", grades);
-
   cJSON_AddBoolToObject(student, "office", student_office);
-
   cJSON *exp = cJSON_CreateArray();
   for (int idx = 0; idx <2 ; idx ++) 
   {
@@ -97,9 +96,9 @@ typedef struct INFOSTRUCT
       cJSON_AddItemToArray(exp, expItem);
   }
   cJSON_AddItemToObject(student, "exp", exp);
-
   cJSON_AddItemToObject(info, "student", student);
 
+  sprintf(string, cJSON_PrintUnformatted(root));
   cJSON_Delete(info);
 ```
 

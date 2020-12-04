@@ -7,8 +7,9 @@
 # 性能测试
 <font color=#999AAA >这里使用目前主流的C语言JSON库 “cJSON” 对比测试基本的数据构建与解析。
 
-> ### 测试数据：
+> ### 测试内容：
 ```
+/* 构建与解析目标 */
 {
     "school": "Guangdong University Of Petrochemical Technology",
     "location": "Maoming",
@@ -35,6 +36,38 @@
 	]
     }
 }
+
+/* 解析数据存储 */
+typedef struct INFOSTRUCT 
+{
+    char    school[64];
+    char    location[16];
+    float   ranking;
+    float   area;
+    struct {
+        char    name[16];
+        float   age;
+        float   grades[3];
+        int     office;
+        struct {
+            char    address[16];
+            float   date;
+        } exp[2];
+    } student;
+} INFO;
+
+/* 构建数据引用 */
+char school[] = "Guangdong University Of Petrochemical Technology";
+char location[] = "Maoming";
+float ranking = 505;
+float area = 2020.643;
+char student_name[] = "zhoutianhao";
+float student_age = 23;
+float student_grades[] = {97, 62, 84};
+int student_office = 1;
+char *student_exp_address[] = {"Guangdong", "Chengdu"};
+float student_exp_date[] = {1906, 1910};
+
 ```
 
 >### 通过cJSON构建
@@ -65,6 +98,8 @@
     cJSON_AddItemToObject(student, "exp", exp);
 
     cJSON_AddItemToObject(school, "student", student);
+        
+    cJSON_Delete(info);
 ```
 
 >### 通过ezJSON构建

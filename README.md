@@ -94,9 +94,11 @@
 
   cJSON_AddItemToObject(cinfo, "student", student);
 
-  strcpy(string, cJSON_PrintUnformatted(info));
+  char *_string = cJSON_PrintUnformatted(info);
+  strcpy(string, _string);
 
-  cJSON_Delete(cinfo);
+  cJSON_free(_string);
+  cJSON_Delete(info);
 ```
 
 ### 通过ezJSON构建

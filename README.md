@@ -9,7 +9,7 @@
 
 ## 测试内容：
 
-<font color=#999AAA >构建与解析目标
+<font color=#999AAA >构建与解析目标（示例）：
 ```
     {
         "school": "Guangdong University Of Petrochemical Technology",
@@ -38,7 +38,7 @@
         }
     }
 ```
-<font color=#999AAA >解析存储的数据
+<font color=#999AAA >解析存储的数据（示例）：
 ```
     typedef struct INFOSTRUCT 
     {
@@ -58,7 +58,7 @@
         } student;
     } INFO;
 ```
-<font color=#999AAA >构建引用的数据
+<font color=#999AAA >构建引用的数据（示例）：
 ```
     char    school[]    = "Guangdong University Of Petrochemical Technology";
     char    location[]  = "Maoming";

@@ -37,7 +37,7 @@
     }
 }
 
-/* 解析数据存储 */
+/* 解析存储的数据 */
 typedef struct INFOSTRUCT 
 {
     char    school[64];
@@ -56,7 +56,7 @@ typedef struct INFOSTRUCT
     } student;
 } INFO;
 
-/* 构建数据引用 */
+/* 构建引用的数据 */
 char school[] = "Guangdong University Of Petrochemical Technology";
 char location[] = "Maoming";
 float ranking = 505;

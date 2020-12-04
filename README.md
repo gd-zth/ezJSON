@@ -4,7 +4,7 @@
 <hr style=" border:solid; width:100px; height:1px;" color=#000000 size=1">
 
 # 一、对比测试
-<font color=#999AAA >这里使用目前主流的C语言JSON库 “cJSON” 对比测试基本的数据构建与解析。
+<font color=#999AAA >这里使用目前主流的C语言库 “cJSON” 对比测试基本的数据构建与解析。
 
 ## 测试内容
 <font color=#999AAA >构建与解析目标：

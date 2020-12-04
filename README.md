@@ -8,9 +8,9 @@
 <font color=#999AAA >这里使用目前主流的C语言JSON库 “cJSON” 对比测试基本的数据构建与解析。
 
 ## 测试内容：
-```
-    /* 构建与解析目标 */
 
+<font color=#999AAA >构建与解析目标
+```
     {
         "school": "Guangdong University Of Petrochemical Technology",
         "location": "Maoming",
@@ -37,9 +37,9 @@
             ]
         }
     }
-
-    /* 解析存储的数据 */
-
+```
+<font color=#999AAA >解析存储的数据
+```
     typedef struct INFOSTRUCT 
     {
         char    school[64];
@@ -57,9 +57,9 @@
             } exp[2];
         } student;
     } INFO;
-
-    /* 构建引用的数据 */
-
+```
+<font color=#999AAA >构建引用的数据
+```
     char    school[]    = "Guangdong University Of Petrochemical Technology";
     char    location[]  = "Maoming";
     float   ranking     = 505;
@@ -70,10 +70,10 @@
     int     student_office      = 1;
     char*   student_exp_address[]   = {"Guangdong", "Chengdu"};
     float   student_exp_date[]      = {1906, 1910};
-
 ```
 
 ## 通过cJSON构建
+代码如下（示例）：
 ```
     cJSON *info = cJSON_CreateObject();
     cJSON_AddStringToObject(info, "school", school);
@@ -103,11 +103,10 @@
     cJSON_AddItemToObject(info, "student", student);
 
     cJSON_Delete(info);
-
 ```
 
 ## 通过ezJSON构建
-
+代码如下（示例）：
 ```
     ezJSON(string)
     {

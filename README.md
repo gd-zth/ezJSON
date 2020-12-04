@@ -7,7 +7,7 @@
 <font color=#999AAA >这里使用目前主流的C语言库 “cJSON” 对比测试基本的数据构建与解析，从代码阅读性、构建与解析速度、运行内存进行比较。
 
 ### 测试内容
-<font color=#999AAA >构建与解析的目标字符串：
+> <font color=#999AAA >构建与解析的目标字符串：
 ```
   {
       "school": "Guangdong University Of Petrochemical Technology",
@@ -37,7 +37,7 @@
   }
 ```
 
-<font color=#999AAA >获取待解析字符串的代码段：
+> <font color=#999AAA >获取待解析字符串的代码段：
 ```
   char string[1024];
 
@@ -52,7 +52,7 @@
   fclose(pFile);
 ```
 
-<font color=#999AAA >存储解析数据的结构体：
+> <font color=#999AAA >存储解析数据的结构体：
 ```
   typedef struct INFOSTRUCT 
   {
@@ -73,7 +73,7 @@
   } INFO;
 ```
 
-<font color=#999AAA >用于构建字符串的变量：
+> <font color=#999AAA >用于构建字符串的变量：
 ```
   char    school[]    = "Guangdong University Of Petrochemical Technology";
   char    location[]  = "Maoming";
@@ -88,7 +88,7 @@
 ```
 
 ### 通过cJSON构建
-代码如下（示例）：
+> 代码如下（示例）：
 ```
   cJSON *info = cJSON_CreateObject();
   cJSON_AddStringToObject(info, "school", school);
@@ -118,7 +118,7 @@
 ```
 
 ### 通过ezJSON构建
-代码如下（示例）：
+> 代码如下（示例）：
 ```
   ezJSON(string)
   {
@@ -145,7 +145,7 @@
 ```
 
 ### 通过cJSON解析
-代码如下（示例）：
+> 代码如下（示例）：
 ```
   cJSON* cinfo = cJSON_Parse(string);
 
@@ -176,7 +176,7 @@
 ```
 
 ### 通过ezJSON解析
-代码如下（示例）：
+> 代码如下（示例）：
 ```
   _ezJSON(err, string)
   {

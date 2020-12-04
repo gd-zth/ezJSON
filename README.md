@@ -7,9 +7,9 @@
 # 性能测试
 <font color=#999AAA >这里使用目前主流的C语言JSON库 “cJSON” 对比测试基本的数据构建与解析。
 
-## 测试内容：
+## 测试内容
 
-<font color=#999AAA >构建与解析目标（示例）：
+<font color=#999AAA >构建与解析目标：
 ```
 {
     "school": "Guangdong University Of Petrochemical Technology",
@@ -38,7 +38,7 @@
     }
 }
 ```
-<font color=#999AAA >解析存储的数据（示例）：
+<font color=#999AAA >解析存储的数据：
 ```
 typedef struct INFOSTRUCT 
 {
@@ -58,7 +58,7 @@ typedef struct INFOSTRUCT
     } student;
 } INFO;
 ```
-<font color=#999AAA >构建引用的数据（示例）：
+<font color=#999AAA >构建引用的数据：
 ```
 char    school[]    = "Guangdong University Of Petrochemical Technology";
 char    location[]  = "Maoming";

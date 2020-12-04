@@ -38,7 +38,7 @@
 ```
 
 
->### 使用ezJSON构建
+>### 通过ezJSON构建
 
 ```
 	ezJSON(string)
@@ -65,7 +65,7 @@
 	}}
 ```
 
->### 使用cJSON构建
+>### 通过cJSON构建
 
 
 

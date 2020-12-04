@@ -1,8 +1,6 @@
 # 前言
 
-<font color=#999AAA >提示：这里可以添加本文要记录的大概内容：
-例如：随着人工智能的不断发展，机器学习这门技术也越来越重要，很多人都开启了学习机器学习，本文就介绍了机器学习的基础内容。</font>
-
+#### 什么是ezJSON?
 <hr style=" border:solid; width:100px; height:1px;" color=#000000 size=1">
 
 <font color=#999AAA >提示：以下是本篇文章正文内容，下面案例可供参考

@@ -9,34 +9,34 @@
 
 > ### 测试内容：
 ```
-	/* 构建与解析目标 */
+    /* 构建与解析目标 */
 
-{
-	"school": "Guangdong University Of Petrochemical Technology",
-	"location": "Maoming",
-	"ranking": 505,
-	"area": 2020.643,
-	"student": {
-	"name": "zhoutianhao",
-	"age": 23,
-	"grades": [
-	97,
-	62,
-	84
-	],
-	"office": true,
-	"exp": [
-	{
-	"address": "Guangdong",
-	"date": 1906
-	},
-	{
-	"address": "Chengdu",
-	"date": 1910
-	}
-	]
-	}
-}
+    {
+        "school": "Guangdong University Of Petrochemical Technology",
+        "location": "Maoming",
+        "ranking": 505,
+        "area": 2020.643,
+        "student": {
+            "name": "zhoutianhao",
+            "age": 23,
+            "grades": [
+                97,
+                62,
+                84
+            ],
+            "office": true,
+            "exp": [
+                {
+                    "address": "Guangdong",
+                    "date": 1906
+                },
+                {
+                    "address": "Chengdu",
+                    "date": 1910
+                }
+            ]
+        }
+    }
 
     /* 解析存储的数据 */
 

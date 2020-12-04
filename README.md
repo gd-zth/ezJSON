@@ -4,7 +4,7 @@ C语言下的人性化、轻量级、高性能JSON库
 
 <hr style=" border:solid; width:100px; height:1px;" color=#000000 size=1">
 
-@[TOC](目录)
+[toc]
 
 # 性能测试
 <font color=#999AAA >测试使用的数据如下：

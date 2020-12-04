@@ -55,22 +55,21 @@
           } exp[2];
       } student;
   } INFO;
-```
 
-<font color=#999AAA >解析使用：
-```
-  char string[1024];
-  INFO info;
+  {
+      char string[1024];
+      INFO info;
 
-  FILE *pFile = fopen("test.json", "r");
+      FILE *pFile = fopen("test.json", "r");
 
-  fseek(pFile, 0L, SEEK_END);
-  long lenFile = ftell(pFile);
-  fseek(pFile, 0L, SEEK_SET);
+      fseek(pFile, 0L, SEEK_END);
+      long lenFile = ftell(pFile);
+      fseek(pFile, 0L, SEEK_SET);
 
-  string[fread(string, 1, lenFile, pFile)] = '\0';
+      string[fread(string, 1, lenFile, pFile)] = '\0';
 
-  fclose(pFile);
+      fclose(pFile);
+  }
 ```
 
 <font color=#999AAA >构建使用：

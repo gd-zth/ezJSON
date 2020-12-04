@@ -90,31 +90,35 @@
 ### 通过cJSON构建
 > 代码如下（示例）：
 ```
-  cJSON *info = cJSON_CreateObject();
-  cJSON_AddStringToObject(info, "school", school);
-  cJSON_AddStringToObject(info, "location", location);
-  cJSON_AddNumberToObject(info, "ranking", ranking);
-  cJSON_AddNumberToObject(info, "area", area);
+  cJSON *cinfo = cJSON_CreateObject();
+
+  cJSON_AddStringToObject(cinfo, "school", info.school);
+  cJSON_AddStringToObject(cinfo, "location", info.location);
+  cJSON_AddNumberToObject(cinfo, "ranking", info.ranking);
+  cJSON_AddNumberToObject(cinfo, "area", info.area);
 
   cJSON *student = cJSON_CreateObject();
-  cJSON_AddStringToObject(student, "name", student_name);
-  cJSON_AddNumberToObject(student, "age", student_age);
-  cJSON *grades = cJSON_CreateFloatArray(student_grades, 3);
+  cJSON_AddStringToObject(student, "name", info.student.name);
+  cJSON_AddNumberToObject(student, "age", info.student.age);
+
+  cJSON *grades = cJSON_CreateFloatArray(info.student.grades, 3);
   cJSON_AddItemToObject(student, "grades", grades);
-  cJSON_AddBoolToObject(student, "office", student_office);
+    
+  cJSON_AddBoolToObject(student, "office", info.student.office);
+
   cJSON *exp = cJSON_CreateArray();
   for (int idx = 0; idx <2 ; idx ++) 
   {
       cJSON *expItem = cJSON_CreateObject();
-      cJSON_AddStringToObject(expItem, "address", student_exp_address[idx]);
-      cJSON_AddNumberToObject(expItem, "date", student_exp_date[idx]);
+      cJSON_AddStringToObject(expItem, "address", info.student.exp[idx].address);
+      cJSON_AddNumberToObject(expItem, "date", info.student.exp[idx].date);
       cJSON_AddItemToArray(exp, expItem);
   }
   cJSON_AddItemToObject(student, "exp", exp);
-  cJSON_AddItemToObject(info, "student", student);
 
-  sprintf(string, cJSON_PrintUnformatted(root));
-  cJSON_Delete(info);
+  cJSON_AddItemToObject(cinfo, "student", student);
+
+  cJSON_Delete(cinfo);
 ```
 
 ### 通过ezJSON构建
@@ -122,26 +126,27 @@
 ```
   ezJSON(string)
   {
-      STR("school",   school);
-      STR("location", location);
-      NUM("ranking",  ranking);
-      NUM("area",     area);
+      STR("school",   info.school);
+      STR("location", info.location);
+      NUM("ranking",  info.ranking);
+      NUM("area",     info.area);
       OBJ("student")
       {
-          STR("name", student_name);
-          NUM("age",  student_age);
+          STR("name", info.student.name);
+          NUM("age",  info.student.age);
           ARR("grades", 3)
           {
-              NUM(NULL, grades[_IDX]);
+              NUM(NULL, info.student.grades[_IDX]);
           }}
-          BOL("office", student_office);
+          BOL("office", info.student.office);
           ARR("exp", 2) {OBJ(NULL)
           {
-              STR("address", student_exp_address[_IDX]);
-              NUM("date",    student_exp_date[_IDX]);
+              STR("address",  info.student.exp[_IDX].address);
+              NUM("date",     info.student.exp[_IDX].date);
           }}}}
       }}
   }}
+
 ```
 
 ### 通过cJSON解析
@@ -194,7 +199,6 @@
           {
               _VAL(NULL, info.student.grades[_IDX]);
           }}
-
           _ARR("exp") {_OBJ(NULL)
           {
               _VAL("address", info.student.exp[_IDX].address);

@@ -1,17 +1,3 @@
-# 系列文章目录
-<font color=#999AAA >提示：这里可以添加系列文章的所有文章的目录，目录需要自己手动添加
-例如：第一章 Python 机器学习入门之pandas的使用
-<hr style=" border:solid; width:100px; height:1px;" color=#000000 size=1">
-
-
-<font color=#999AAA >提示：写完文章后，目录可以自动生成，如何生成可参考右边的帮助文档
-
-@[TOC](文章目录)
-
-</font>
-
-<hr style=" border:solid; width:100px; height:1px;" color=#000000 size=1">
-
 # 前言
 
 <font color=#999AAA >提示：这里可以添加本文要记录的大概内容：

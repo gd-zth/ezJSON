@@ -36,7 +36,7 @@
       }
   }
 ```
-<font color=#999AAA >解析存储的数据：
+<font color=#999AAA >存储解析的数据：
 ```
 typedef struct INFOSTRUCT 
   {
@@ -56,7 +56,7 @@ typedef struct INFOSTRUCT
       } student;
   } INFO;
 ```
-<font color=#999AAA >构建引用的数据：
+<font color=#999AAA >构建使用的数据：
 ```
   char    strig[1024];
   char    school[]    = "Guangdong University Of Petrochemical Technology";

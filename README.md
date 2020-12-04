@@ -1,6 +1,6 @@
 
 ## ezJSON
-<font color=#999AAA >C语言下的人性化、轻量级、高性能JSON库
+<font color=#999AAA >C语言下的人性化、高性能、轻量级JSON库
 <hr style=" border:solid; width:100px; height:1px;" color=#000000 size=1">
 
 ## 一、对比测试
@@ -93,6 +93,8 @@
   cJSON_AddItemToObject(student, "exp", exp);
 
   cJSON_AddItemToObject(cinfo, "student", student);
+
+  strcpy(string, cJSON_PrintUnformatted(info));
 
   cJSON_Delete(cinfo);
 ```

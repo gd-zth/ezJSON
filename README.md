@@ -3,11 +3,13 @@
 <font color=#999AAA >C语言下的人性化、高性能、轻量级JSON库
 <hr style=" border:solid; width:100px; height:1px;" color=#000000 size=1">
 
-## 一、对比测试
-<font color=#999AAA >这里以目前在C语言下最主流的JSON库：cJSON 为例，从代码阅读性、构建与解析速度、运行内存进行比较。
+## 一、性能测试
+<font color=#999AAA >测试平台使用的是阿里云单核CPU、2G内存的服务器，搭载有64位Ubuntu18.04系统。为了更直观感受性能测试的结果，这里使用目前最主流的JSON库：cJSON 进行对比测试。
 
 ### 测试内容
-> <font color=#999AAA >目标字符串：
+<font color=#999AAA >对目标字符串进行一百万次循环的构建、全部解析和局部解析，分别使用两种库进行5次测试。
+### 测试对象
+> 目标字符串：
 ```
   {
       "school": "Guangdong University Of Petrochemical Technology",
@@ -37,7 +39,7 @@
   }
 ```
 
-> <font color=#999AAA >目标结构体：
+> 目标结构体：
 ```
   typedef struct INFOSTRUCT 
   {
@@ -129,7 +131,7 @@
 ```
 
 ### 通过cJSON解析
-> 代码如下（示例）：
+> 全部解析代码如下（示例）：
 ```
   cJSON* cinfo = cJSON_Parse(string);
 
@@ -159,8 +161,24 @@
   cJSON_Delete(info);
 ```
 
+> 局部解析代码如下（示例）：
+```
+  cJSON* cinfo = cJSON_Parse(string);
+  cJSON* student = cJSON_GetObjectItem(cinfo, "student");
+
+  cJSON *exp = cJSON_GetObjectItem(student, "exp");
+  for (int idx; idx < cJSON_GetArraySize(exp); idx ++)
+  {
+      cJSON *expItem = cJSON_GetArrayItem(exp, idx);
+      sprintf(info.student.exp[idx].address, "%s", cJSON_GetObjectItem(expItem, "address")->valuestring);
+      info.student.exp[idx].date = cJSON_GetObjectItem(expItem, "date")->valuedouble;
+  }
+  
+  cJSON_Delete(info);
+```
+
 ### 通过ezJSON解析
-> 代码如下（示例）：
+> 全部解析代码如下（示例）：
 ```
   _ezJSON(err, string)
   {
@@ -179,6 +197,19 @@
               _VAL(NULL, info.student.grades[_IDX]);
           }}
           _ARR("exp") {_OBJ(NULL)
+          {
+              _VAL("address", info.student.exp[_IDX].address);
+              _VAL("date",    info.student.exp[_IDX].date);
+          }}}}
+      }}
+  }}
+```
+
+> 局部解析代码如下（示例）：
+```
+  _ezJSON(err, string)
+  {
+      _OBJ("student") {_ARR("exp") {_OBJ(NULL)
           {
               _VAL("address", info.student.exp[_IDX].address);
               _VAL("date",    info.student.exp[_IDX].date);

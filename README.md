@@ -49,46 +49,21 @@
 ## API
 
 ### 构建
-```
-/* 功能：执行解析的入口
- * 参数：_CONTENT   存储生成的字符串
-*/
-#define ezJSON(_CONTENT)
 
-/* 功能：创建对象
- * 参数：_CONTENT   键名
-*/
-#define OBJ(_ezJSON_KEY)
-
-/* 功能：创建数组
- * 参数：_ezJSON_KEY        键名
- *       _ezJSON_ARRAY_SIZE 大于0：预设的元素个数；-1：不预设个数
-*/
-#define ARR(_ezJSON_KEY, _ezJSON_ARRAY_SIZE)
-
-/* 功能：创建数字键值对
- * 参数：_ezJSON_KEY    键名
- *       ezJSON_VALUE   键值（float）；NULL：表示添加到数组
-*/
-#define NUM(_ezJSON_KEY, ezJSON_VALUE)
-
-/* 功能：创建字符键值对
- * 参数：_ezJSON_KEY    键名
- *       _ezJSON_VALUE  键值（char[]）；NULL：表示添加到数组
-*/
-#define STR(_ezJSON_KEY, _ezJSON_VALUE)
-
-/* 功能：创建布尔键值对
- * 参数：_ezJSON_KEY    键名
- *       _ezJSON_VALUE  键值（char[]）；NULL：表示添加到数组
-*/
-#define BOL(_ezJSON_KEY, _ezJSON_VALUE)
-
-/* 功能：创建空键值对
- * 参数：_ezJSON_KEY    键名
-*/
-#define NUL(_ezJSON_KEY)
-```
+<font color=#999AAA >hahahah
+> #define ezJSON(char *string)
+<font color=#999AAA >hahahah
+> #define OBJ(char *key)
+<font color=#999AAA >hahahah
+> #define ARR(char *key, int size)
+<font color=#999AAA >hahahah
+> #define NUM(char *key, float value)
+<font color=#999AAA >hahahah
+> #define STR(char *key, char *value)
+<font color=#999AAA >hahahah
+> #define BOL(char *key, int value)
+<font color=#999AAA >hahahah
+> #define NUL(char *key)
 
 ### 解析
 

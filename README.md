@@ -31,7 +31,7 @@
 | :----: | :----: |  :----: | :----: | :----: | 
 | _ezJSON_NONE | 0 | 异常 | - | - |
 | _ezJSON_OBJECT| 1 | 对象 | { } | - |
-| _ezJSON_ARRAY | 2 | 数组 | [] | - | 
+| _ezJSON_ARRAY | 2 | 数组 | [ ] | - | 
 | _ezJSON_STRING | 3 | 字符串 | " " | char[] |
 | _ezJSON_NUMBER | 4 | 数字 | 0~9, '.', '-'| float |
 | _ezJSON_BOOL | 5 | 布尔 | false, ture | int |
@@ -50,18 +50,15 @@
 
 ### 构建
 ```
-
 /* 功能：执行解析的入口
  * 参数：_CONTENT   存储生成的字符串
 */
 #define ezJSON(_CONTENT)
 
-
 /* 功能：创建对象
  * 参数：_CONTENT   键名
 */
 #define OBJ(_ezJSON_KEY)
-
 
 /* 功能：创建数组
  * 参数：_ezJSON_KEY        键名
@@ -69,20 +66,17 @@
 */
 #define ARR(_ezJSON_KEY, _ezJSON_ARRAY_SIZE)
 
-
 /* 功能：创建数字键值对
  * 参数：_ezJSON_KEY    键名
  *       ezJSON_VALUE   键值（float）；NULL：表示添加到数组
 */
 #define NUM(_ezJSON_KEY, ezJSON_VALUE)
 
-
 /* 功能：创建字符键值对
  * 参数：_ezJSON_KEY    键名
  *       _ezJSON_VALUE  键值（char[]）；NULL：表示添加到数组
 */
 #define STR(_ezJSON_KEY, _ezJSON_VALUE)
-
 
 /* 功能：创建布尔键值对
  * 参数：_ezJSON_KEY    键名

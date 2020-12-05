@@ -3,13 +3,13 @@
 <font color=#999AAA >C语言下的人性化、高性能、轻量级JSON库
 <hr style=" border:solid; width:100px; height:1px;" color=#000000 size=1">
 
-## 一、性能测试
+# 一、性能测试
 <font color=#999AAA >测试平台使用的是阿里云单核CPU、2G内存的服务器，搭载有64位Ubuntu18.04系统。为了更直观感受性能测试的结果，这里使用目前最主流的JSON库：cJSON 进行对比测试。
 
-### 测试内容
+## 测试内容
 <font color=#999AAA >对目标字符串进行一百万次循环的构建、全部解析和局部解析，分别使用两种库进行5次测试。
 
-### 测试对象
+## 测试对象
 > 目标字符串：
 ```
   {
@@ -66,7 +66,7 @@
   } INFO, pINFO;
 ```
 
-### 通过cJSON构建
+## 通过cJSON构建
 > 代码如下（示例）：
 ```
   cJSON *cinfo = cJSON_CreateObject();
@@ -104,7 +104,7 @@
   cJSON_Delete(info);
 ```
 
-### 通过ezJSON构建
+## 通过ezJSON构建
 > 代码如下（示例）：
 ```
   ezJSON(string)
@@ -135,7 +135,7 @@
   }}
 ```
 
-### 通过cJSON解析
+## 通过cJSON解析
 > 全部解析代码如下（示例）：
 ```
   cJSON* cinfo = cJSON_Parse(string);
@@ -184,7 +184,7 @@
   cJSON_Delete(info);
 ```
 
-### 通过ezJSON解析
+## 通过ezJSON解析
 > 全部解析代码如下（示例）：
 ```
   _ezJSON(err, string)

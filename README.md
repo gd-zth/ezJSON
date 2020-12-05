@@ -6,10 +6,13 @@
 ## 目录
 * [特性](#特性)
 * [参数](#参数)
-* [API](#API)
 * [Demo](#Demo)
   * [构建](#构建)
   * [解析](#解析)
+* [API](#API)
+  * [构建](#构建)
+  * [解析](#解析)
+  * [增删改查](#增删改查)
 * [性能测试](#性能测试)
   * [内容](#内容)
   * [代码](#代码)
@@ -29,7 +32,6 @@
 
 | 宏定义 | 对应值 | 键类型 | 符号 | 变量类型 |
 | :----: | :----: |  :----: | :----: | :----: | 
-| _ezJSON_NONE | 0 | 异常 | - | - |
 | _ezJSON_OBJECT| 1 | 对象 | { } | - |
 | _ezJSON_ARRAY | 2 | 数组 | [ ] | - | 
 | _ezJSON_STRING | 3 | 字符串 | " " | char[] |
@@ -46,9 +48,15 @@
 | _ezJSON_ERR_NOTEXIST | -2 | 键不存在 |
 | _ezJSON_ERR_FORMAT | -3 | 格式错误 |
 
-## APIs
+## Demo
 
-### 构建相关
+### 构建
+
+### 解析
+
+## API
+
+### 构建
 <font color=#999AAA >创建构建目标；内存指针 `string`；
 > void ezJSON( char* string ) ;
 
@@ -70,15 +78,23 @@
 <font color=#999AAA >创建空类型；键 `key`，不能为 __null__；
 > void STR( char *key ) ;
 
-### 解析相关
-
-
-
-## Demo
-
-### 构建
-
 ### 解析
+<font color=#999AAA >创建解析目标；全局错误码 `err`，可以为 __null__；目标指针 `string`；
+> void _ezJSON( int* err , char* string ) ;
+
+<font color=#999AAA >解析对象类型；返回错误码；键 `key`，为 __null__ 表示上级为数组；
+> int _OBJ( char* key ) ;
+
+<font color=#999AAA >解析数组类型；返回错误码；键 `key`，为 __null__ 表示上级为数组；
+> int _ARR( char* key ) ;
+
+<font color=#999AAA >解析数字、字符、布尔类型；返回错误码；键 `key`，为 __null__ 表示上级为数组；键值 `value`，可为三种类型，动态获取；
+> int _ARR( char* key , float \char *\int value ) ;
+
+<font color=#999AAA >获取键值类型；返回值大于 __0__ 表示 __类型码__，否则表示 __错误码__；键 `key`，为 __null__ 表示上级为数组；
+> int _TYPE( char* key ) ;
+
+### 增删改查
 
 ## 性能测试
 <font color=#999AAA >测试平台使用的是阿里云单核CPU、2G内存的服务器，搭载有64位Ubuntu18.04系统。为了更直观感受性能测试的结果，这里使用目前最主流的JSON库：cJSON 进行对比测试。

@@ -8,6 +8,7 @@
 
 ### 测试内容
 <font color=#999AAA >对目标字符串进行一百万次循环的构建、全部解析和局部解析，分别使用两种库进行5次测试。
+
 ### 测试对象
 > 目标字符串：
 ```
@@ -112,15 +113,19 @@
       STR("location", info.location);
       NUM("ranking",  info.ranking);
       NUM("area",     info.area);
+      
       OBJ("student")
       {
           STR("name", info.student.name);
           NUM("age",  info.student.age);
+          
           ARR("grades", 3)
           {
               NUM(NULL, info.student.grades[_IDX]);
           }}
+          
           BOL("office", info.student.office);
+          
           ARR("exp", 2) {OBJ(NULL)
           {
               STR("address",  info.student.exp[_IDX].address);
@@ -143,11 +148,13 @@
   cJSON* student = cJSON_GetObjectItem(cinfo, "student");
   sprintf(info.student.name, "%s", cJSON_GetObjectItem(student, "name")->valuestring);
   info.student.age = cJSON_GetObjectItem(student, "age")->valuedouble;
+  
   cJSON *grades = cJSON_GetObjectItem(student, "grades");
   for (int idx; idx < cJSON_GetArraySize(grades); idx ++)
   {
       info.student.grades[idx] = cJSON_GetArrayItem(grades, idx)->valuedouble;
   }
+  
   info.student.office = cJSON_GetObjectItem(student, "office")->valueint;
 
   cJSON *exp = cJSON_GetObjectItem(student, "exp");
@@ -191,11 +198,14 @@
       {
           _VAL("name",   info.student.name);
           _VAL("age",    info.student.age);
-          _VAL("office", info.student.office);
+          
           _ARR("grades")
           {
               _VAL(NULL, info.student.grades[_IDX]);
           }}
+          
+          _VAL("office", info.student.office);
+          
           _ARR("exp") {_OBJ(NULL)
           {
               _VAL("address", info.student.exp[_IDX].address);

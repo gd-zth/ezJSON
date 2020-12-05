@@ -50,20 +50,26 @@
 
 ### 构建
 
-<font color=#999AAA >hahahah
-> #define ezJSON(char *string)
-<font color=#999AAA >hahahah
-> #define OBJ(char *key)
-<font color=#999AAA >hahahah
-> #define ARR(char *key, int size)
-<font color=#999AAA >hahahah
-> #define NUM(char *key, float value)
-<font color=#999AAA >hahahah
-> #define STR(char *key, char *value)
-<font color=#999AAA >hahahah
-> #define BOL(char *key, int value)
-<font color=#999AAA >hahahah
-> #define NUL(char *key)
+<font color=#999AAA >构建入口
+`void ezJSON(char *string)`
+
+<font color=#999AAA >构建入口
+`#define OBJ(char *key)`
+
+<font color=#999AAA >构建入口
+`#define ARR(char *key, int size)`
+
+<font color=#999AAA >构建入口
+`#define NUM(char *key, float value)`
+
+<font color=#999AAA >构建入口
+`#define STR(char *key, char *value)`
+
+<font color=#999AAA >构建入口
+`#define BOL(char *key, int value)`
+
+<font color=#999AAA >构建入口
+`#define NUL(char *key)`
 
 ### 解析
 

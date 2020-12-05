@@ -3,7 +3,7 @@
 <font color=#999AAA >C语言下的人性化、高性能、轻量级JSON库
 <hr style=" border:solid; width:100px; height:1px;" color=#000000 size=1">
 
-## [3] 性能测试
+## 性能测试
 <font color=#999AAA >测试平台使用的是阿里云单核CPU、2G内存的服务器，搭载有64位Ubuntu18.04系统。为了更直观感受性能测试的结果，这里使用目前最主流的JSON库：cJSON 进行对比测试。
 
 ### 内容
@@ -66,8 +66,8 @@
   } INFO, pINFO;
 ```
 
-### cJSON构建
-> 代码如下（示例）：
+### 构建
+> cJSON构建全部（示例）：
 ```
   cJSON *cinfo = cJSON_CreateObject();
 
@@ -104,8 +104,7 @@
   cJSON_Delete(info);
 ```
 
-### ezJSON构建
-> 代码如下（示例）：
+> ezJSON构建全部（示例）：
 ```
   ezJSON(string)
   {
@@ -135,8 +134,8 @@
   }}
 ```
 
-### cJSON解析
-> 全部解析（示例）：
+### 解析
+> cJSON解析全部（示例）：
 ```
   cJSON* cinfo = cJSON_Parse(string);
 
@@ -168,24 +167,7 @@
   cJSON_Delete(info);
 ```
 
-> 局部解析（示例）：
-```
-  cJSON* cinfo = cJSON_Parse(string);
-  cJSON* student = cJSON_GetObjectItem(cinfo, "student");
-
-  cJSON *exp = cJSON_GetObjectItem(student, "exp");
-  for (int idx; idx < cJSON_GetArraySize(exp); idx ++)
-  {
-      cJSON *expItem = cJSON_GetArrayItem(exp, idx);
-      sprintf(info.student.exp[idx].address, "%s", cJSON_GetObjectItem(expItem, "address")->valuestring);
-      info.student.exp[idx].date = cJSON_GetObjectItem(expItem, "date")->valuedouble;
-  }
-  
-  cJSON_Delete(info);
-```
-
-### ezJSON解析
-> 全部解析（示例）：
+> ezJSON解析全部（示例）：
 ```
   _ezJSON(err, string)
   {
@@ -215,7 +197,23 @@
   }}
 ```
 
-> 局部解析（示例）：
+> cJSON解析局部（示例）：
+```
+  cJSON* cinfo = cJSON_Parse(string);
+  cJSON* student = cJSON_GetObjectItem(cinfo, "student");
+
+  cJSON *exp = cJSON_GetObjectItem(student, "exp");
+  for (int idx; idx < cJSON_GetArraySize(exp); idx ++)
+  {
+      cJSON *expItem = cJSON_GetArrayItem(exp, idx);
+      sprintf(info.student.exp[idx].address, "%s", cJSON_GetObjectItem(expItem, "address")->valuestring);
+      info.student.exp[idx].date = cJSON_GetObjectItem(expItem, "date")->valuedouble;
+  }
+  
+  cJSON_Delete(info);
+```
+
+> ezJSON解析局部（示例）：
 ```
   _ezJSON(err, string)
   {
@@ -228,8 +226,6 @@
   }}
 ```
 
-
-<font color=#999AAA >示例：pandas 是基于NumPy 的一种工具，该工具是为了解决数据分析任务而创建的。
 
 # 二、使用步骤
 ## 1.引入库

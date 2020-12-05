@@ -17,7 +17,9 @@
   * [代码](#代码)
     * [构建](#构建)
     * [解析](#解析)
-  * [性能](#性能)
+* [性能测试](#性能测试)
+  * [内容](#测试内容)
+  * [结果](#结果)
 
 ## 特性
 
@@ -152,7 +154,7 @@
 ### 代码
 
 #### 构建
-> ezJSON构建：
+> 使用ezJSON构建：
 ```
   ezJSON(string)
   {
@@ -178,7 +180,56 @@
   }}
 ```
 
-> cJSON构建：
+#### 解析
+> 使用ezJSON解析全部：
+```
+  _ezJSON(NULL, string)
+  {
+      _VAL("school",   info.school);
+      _VAL("location", info.location);
+      _VAL("ranking",  info.ranking);
+      _VAL("area",     info.area);
+      _OBJ("student") 
+      {
+          _VAL("name", info.student.name);
+          _VAL("age",  info.student.age);
+          _ARR("grades")
+          {
+              _VAL(NULL, info.student.grades[_IDX]);
+          }}
+          _VAL("office", info.student.office);
+          _ARR("exp") {_OBJ(NULL)
+          {
+              _VAL("address", info.student.exp[_IDX].address);
+              _VAL("date",    info.student.exp[_IDX].date);
+          }}}}
+      }}
+  }}
+```
+
+> 使用ezJSON解析局部：
+```
+  _ezJSON(NULL, string)
+  {
+      _OBJ("student") {_ARR("exp") {_OBJ(NULL)
+          {
+              _VAL("address", info.student.exp[_IDX].address);
+              _VAL("date",    info.student.exp[_IDX].date);
+          }}}}
+      }}
+  }}
+```
+
+
+
+### 性能测试
+<font color=#999AAA >测试平台使用的是阿里云单核CPU、2G内存的服务器，搭载有64位Ubuntu18.04系统，这里加入目前最主流的C语言库“cJSON” 进行对比测试。
+
+#### 测试内容
+<font color=#999AAA >对 __Demo__ 中的目标字符串进行一百万次循环的构建、全部解析和局部解析，分别使用两种库进行5次计时测试。
+
+#### cJSON测试代码
+> 构建：
 ```
   cJSON *cinfo = cJSON_CreateObject();
 
@@ -215,34 +266,7 @@
   cJSON_Delete(info);
 ```
 
-#### 解析
-> ezJSON解析全部：
-```
-  _ezJSON(NULL, string)
-  {
-      _VAL("school",   info.school);
-      _VAL("location", info.location);
-      _VAL("ranking",  info.ranking);
-      _VAL("area",     info.area);
-      _OBJ("student") 
-      {
-          _VAL("name", info.student.name);
-          _VAL("age",  info.student.age);
-          _ARR("grades")
-          {
-              _VAL(NULL, info.student.grades[_IDX]);
-          }}
-          _VAL("office", info.student.office);
-          _ARR("exp") {_OBJ(NULL)
-          {
-              _VAL("address", info.student.exp[_IDX].address);
-              _VAL("date",    info.student.exp[_IDX].date);
-          }}}}
-      }}
-  }}
-```
-
-> cJSON解析全部：
+> 解析全部：
 ```
   cJSON* cinfo = cJSON_Parse(string);
 
@@ -275,20 +299,7 @@
   cJSON_Delete(cinfo);
 ```
 
-> ezJSON解析局部：
-```
-  _ezJSON(NULL, string)
-  {
-      _OBJ("student") {_ARR("exp") {_OBJ(NULL)
-          {
-              _VAL("address", info.student.exp[_IDX].address);
-              _VAL("date",    info.student.exp[_IDX].date);
-          }}}}
-      }}
-  }}
-```
-
-> cJSON解析局部：
+> 解析局部：
 ```
   cJSON* cinfo = cJSON_Parse(string);
 
@@ -306,12 +317,6 @@
 
   cJSON_Delete(cinfo);
 ```
-
-### 性能测试
-<font color=#999AAA >测试平台使用的是阿里云单核CPU、2G内存的服务器，搭载有64位Ubuntu18.04系统，这里加入目前最主流的C语言库“cJSON” 进行对比测试。
-
-#### 内容
-<font color=#999AAA >对目标字符串进行一百万次循环的构建、全部解析和局部解析，分别使用两种库进行5次测试。
 
 #### 结果
 <font color=#999AAA >执行构建代码用时（ms）：

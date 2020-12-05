@@ -6,10 +6,10 @@
 ## 目录
 * [特性](#特性)
 * [使用](#使用)
-* [参数](#参数)
 * [API](#APIs)
 * [Demo](#Demo)
 * [性能测试](#性能测试)
+* [参数](#参数)
 
 ## 特性
 
@@ -22,28 +22,6 @@
 ```
 #include <ezJSON/ezJSON.h>
 ```
-
-## 参数
-
-### 文本类型
-
-| 宏定义 | 对应值 | 键类型 | 符号 | 变量类型 |
-| :----: | :----: |  :----: | :----: | :----: | 
-| _ezJSON_OBJECT| 1 | 对象 | { } | - |
-| _ezJSON_ARRAY | 2 | 数组 | [ ] | - | 
-| _ezJSON_STRING | 3 | 字符串 | " " | char[] |
-| _ezJSON_NUMBER | 4 | 数字 | 0~9, '.', '-'| float |
-| _ezJSON_BOOL | 5 | 布尔 | false, ture | int |
-| _ezJSON_NONE | 6 | 空 | null | NULL |
-
-### 错误码
-
-| 宏定义 | 对应值 | 含义 |
-| :----: | :----: |  :----: |
-| _ezJSON_ERR_NONE| 0 | 无 |
-| _ezJSON_ERR_SYMBOL | -1 | 非法字符 |
-| _ezJSON_ERR_NOTEXIST | -2 | 键不存在 |
-| _ezJSON_ERR_FORMAT | -3 | 格式错误 |
 
 ## API
 
@@ -333,3 +311,26 @@
 | :----: | :----: | :----: | :----: | :----: | :----: |
 | cJSON  | 6334 | 6257 | 6330 | 6044 | 6163 |
 | ezJSON | 5107 |5028 | 5040 |5172 | 5125 |
+  
+## 参数
+
+### 文本类型
+
+| 宏定义 | 对应值 | 键类型 | 符号 | 变量类型 |
+| :----: | :----: |  :----: | :----: | :----: | 
+| _ezJSON_OBJECT| 1 | 对象 | { } | - |
+| _ezJSON_ARRAY | 2 | 数组 | [ ] | - | 
+| _ezJSON_STRING | 3 | 字符串 | " " | char[] |
+| _ezJSON_NUMBER | 4 | 数字 | 0~9, '.', '-'| float |
+| _ezJSON_BOOL | 5 | 布尔 | false, ture | int |
+| _ezJSON_NONE | 6 | 空 | null | NULL |
+
+### 错误码
+
+| 宏定义 | 对应值 | 含义 |
+| :----: | :----: |  :----: |
+| _ezJSON_ERR_NONE| 0 | 无 |
+| _ezJSON_ERR_SYMBOL | -1 | 非法字符 |
+| _ezJSON_ERR_NOTEXIST | -2 | 键不存在 |
+| _ezJSON_ERR_FORMAT | -3 | 格式错误 |
+

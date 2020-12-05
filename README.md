@@ -49,9 +49,12 @@
 ## API
 
 ### 构建
+<font color=#999AAA >创建构建目标；内存指针 `string`；
+> void ezJSON( char* string ) ;
 
-<font color=#999AAA >**创建构建目标** `void ezJSON(char *string)`；       内存指针 `string`；  
-<font color=#999AAA >**创建对象类型** `void OBJ(char *key)`；             键 `key`，添加到数组填 **null**；  
+<font color=#999AAA >创建对象类型；键 `key`，添加到数组填 **null**；
+> void OBJ(char *key) ;  
+
 <font color=#999AAA >**创建数组类型** `void ARR(char *key, int size)`；   键 `key`，添加到数组填 **null**；元素个数`size`，大于**0**表示预设大小，**-1**表示不预设；  
 <font color=#999AAA >**创建数字类型** `void NUM(char *key, float value)`；键 `key`，添加到数组填 **null**；键值 `value`；  
 <font color=#999AAA >**创建字符类型** `void STR(char *key, char *value)`；键 `key`，添加到数组填 **null**；键值 `value`；   

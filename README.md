@@ -5,7 +5,7 @@
 
 ## 目录
 * [特性](#特性)
-* [定义](#定义)
+* [参数](#参数)
 * [API](#API)
 * [Demo](#Demo)
   * [构建](#构建)
@@ -23,9 +23,9 @@
 * 高性能：构建目标用时为主流JSON库的一半，对长数据局部解析具有良好的支持。
 * 轻量级：程序基于指针操作，执行过程不申请占用额外的内存。
 
-## 定义
+## 参数
 
-### 键值类型
+### 文本类型
 
 | 宏定义 | 对应值 | 键类型 | 变量类型 |
 | :----: | :----: |  :----: | :----: | 
@@ -47,6 +47,52 @@
 | _ezJSON_ERR_FORMAT | -3 | 格式错误 |
 
 ## API
+
+### 构建
+```
+
+/* 功能：执行解析的入口
+ * 参数：_CONTENT   存储生成的字符串
+*/
+#define ezJSON(_CONTENT)
+
+
+/* 功能：创建对象
+ * 参数：_CONTENT   键名
+*/
+#define OBJ(_ezJSON_KEY)
+
+
+/* 功能：创建数组
+ * 参数：_CONTENT           键名
+ *       ezJSON_ARRAY_SIZE  大于0：预设的元素个数；-1：不预设个数
+*/
+#define ARR(_ezJSON_KEY, ezJSON_ARRAY_SIZE)
+
+
+/* 功能：创建数字键值对
+ * 参数：_CONTENT       键名
+ *       ezJSON_VALUE   键值（float）；NULL：表示添加到数组
+*/
+#define NUM(_ezJSON_KEY, ezJSON_VALUE)
+
+
+/* 功能：创建字符键值对
+ * 参数：_CONTENT       键名
+ *       ezJSON_VALUE   键值（char[]）；NULL：表示添加到数组
+*/
+#define STR(_ezJSON_KEY, ezJSON_VALUE)
+
+
+/* 功能：创建字符键值对
+ * 参数：_CONTENT       键名
+ *       ezJSON_VALUE   键值（char[]）；NULL：表示添加到数组
+*/
+#define BOL(_ezJSON_KEY, ezJSON_VALUE)
+#define NUL(_ezJSON_KEY)
+```
+
+### 解析
 
 ## Demo
 

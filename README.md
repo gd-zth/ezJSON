@@ -26,10 +26,10 @@
 
 ### 键值类型
 
-| 键值类型 | 宏定义 | 变量类型 | 定义值 |
-| :----: | :----: |  :----: | :----: | 
+| 键值类型 | 宏定义 | 值 | 变量类型 |
+| :----: | :----: |  :----: | :----: |
 | 异常 | _ezJSON_NONE | 0 | - |
-| 对象 | _ezJSON_OBJECT | 1 | | - 
+| 对象 | _ezJSON_OBJECT | 1 | - |
 | 数组 | _ezJSON_ARRAY | 2 | - |
 | 字符串 | _ezJSON_STRING | 3 | char[] |
 | 数字 | _ezJSON_NUMBER | 4 | float |
@@ -38,19 +38,19 @@
 
 ### 错误码
 
-| 含义 | 宏定义 | 变量类型 |
-| :----: | :----: |  :----: | 
-| 无 | _ezJSON_ERR_NONE | - |
-| 数组 | _ezJSON_ERR_NOTEXIST | - |
-| 字符串 | _ezJSON_ERR_SYMBOL | char[] |
-| 数字 | _ezJSON_ERR_KEY | float |
-| 布尔 | _ezJSON_ERR_VALUE | int |
-| 空 | _ezJSON_ERR_OBJECT | NULL |
-| 空 | _ezJSON_ERR_ARRAY | NULL |
-| 空 | _ezJSON_ERR_STRING | NULL |
-| 空 | _ezJSON_ERR_NUMBER | NULL |
-| 空 | _ezJSON_ERR_BOOL | NULL |
-| 空 | _ezJSON_ERR_NULL | NULL |
+ 含义 | 宏定义 | 变量类型 
+ :----: | :----: |  :----: 
+ 无 | _ezJSON_ERR_NONE | - 
+ 数组 | _ezJSON_ERR_NOTEXIST | - 
+ 字符串 | _ezJSON_ERR_SYMBOL | char[] 
+ 数字 | _ezJSON_ERR_KEY | float 
+ 布尔 | _ezJSON_ERR_VALUE | int 
+ 空 | _ezJSON_ERR_OBJECT | NULL 
+ 空 | _ezJSON_ERR_ARRAY | NULL 
+ 空 | _ezJSON_ERR_STRING | NULL 
+ 空 | _ezJSON_ERR_NUMBER | NULL 
+ 空 | _ezJSON_ERR_BOOL | NULL 
+ 空 | _ezJSON_ERR_NULL | NULL 
 
 ## Demo
 

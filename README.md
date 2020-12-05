@@ -27,15 +27,15 @@
 
 ### 文本类型
 
-| 宏定义 | 对应值 | 键类型 | 变量类型 |
+| 宏定义 | 对应值 | 键类型 | 符号 | 变量类型 |
 | :----: | :----: |  :----: | :----: | 
-| _ezJSON_NONE | 0 | 异常 | - |
-| _ezJSON_OBJECT| 1 | 对象 | - | 
-| _ezJSON_ARRAY | 2 | 数组 | - | 
-| _ezJSON_STRING | 3 | 字符串 | char[] |
-| _ezJSON_NUMBER | 4 | 数字 | float | 
-| _ezJSON_BOOL | 5 | 布尔 | int | 
-| _ezJSON_NONE | 6 | 空 |  NULL | 
+| _ezJSON_NONE | 0 | 异常 | - | - |
+| _ezJSON_OBJECT| 1 | 对象 | { } | - | 
+| _ezJSON_ARRAY | 2 | 数组 | [] | - | 
+| _ezJSON_STRING | 3 | 字符串 | " " | char[] |
+| _ezJSON_NUMBER | 4 | 数字 | 0~9, '.', '-'| float | 
+| _ezJSON_BOOL | 5 | 布尔 | false, ture | int | 
+| _ezJSON_NONE | 6 | 空 | null |  NULL | 
 
 ### 错误码
 

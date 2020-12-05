@@ -3,6 +3,8 @@
 <font color=#999AAA >C语言下的人性化、高性能、轻量级JSON库
 <hr style=" border:solid; width:100px; height:1px;" color=#000000 size=1">
 
+[TOC]
+
 ## 性能测试
 <font color=#999AAA >测试平台使用的是阿里云单核CPU、2G内存的服务器，搭载有64位Ubuntu18.04系统。为了更直观感受性能测试的结果，这里使用目前最主流的JSON库：cJSON 进行对比测试。
 

@@ -52,22 +52,22 @@
 <font color=#999AAA >创建构建目标；内存指针 `string`；
 > void ezJSON( char* string ) ;
 
-<font color=#999AAA >创建对象类型；键 `key`，为 **null** 表示添加到数组；
+<font color=#999AAA >创建对象类型；键 `key`，为 __null__ 表示添加到数组；
 > void OBJ( char* key ) ;  
 
-<font color=#999AAA >创建数组类型；键 `key`，为 **null** 表示添加到数组；元素个数 `size`，大于 **0** 表示预设大小，**-1** 表示不预设；
+<font color=#999AAA >创建数组类型；键 `key`，为 __null__ 表示添加到数组；元素个数 `size`，大于 __0__ 表示预设大小，__-1__ 表示不预设；
 > void ARR( char* key , int size ) ;
 
-<font color=#999AAA >创建数字类型；键 `key`，为 **null** 表示添加到数组；键值 `value`，**float** 类型；
+<font color=#999AAA >创建数字类型；键 `key`，为 __null__ 表示添加到数组；键值 `value`，__float__ 类型；
 > void NUM( char* key , float value ) ;
 
-<font color=#999AAA >创建字符类型；键 `key`，为 **null** 表示添加到数组；键值 `value`，**char * **类型；   
+<font color=#999AAA >创建字符类型；键 `key`，为 __null__ 表示添加到数组；键值 `value`，__char *__类型；   
 > void STR( char* key , char* value ) ;
 
-<font color=#999AAA >创建布尔类型；键 `key`，为 **null** 表示添加到数组；键值 `value`，**int** 类型；
+<font color=#999AAA >创建布尔类型；键 `key`，为 __null__ 表示添加到数组；键值 `value`，__int__ 类型；
 > void STR(char *key, int value) ;
 
-<font color=#999AAA >创建空类型；键 `key`，不能为 **null**；
+<font color=#999AAA >创建空类型；键 `key`，不能为 __null__；
 > void STR( char *key ) ;
 
 ### 解析
@@ -201,167 +201,4 @@
           
           BOL("office", info.student.office);
           
-          ARR("exp", 2) {OBJ(NULL)
-          {
-              STR("address",  info.student.exp[_IDX].address);
-              NUM("date",     info.student.exp[_IDX].date);
-          }}}}
-      }}
-  }}
-```
-
-#### 解析
-> cJSON解析全部：
-```
-  cJSON* cinfo = cJSON_Parse(string);
-
-  sprintf(info.school, "%s", cJSON_GetObjectItem(cinfo, "school")->valuestring);
-  sprintf(info.location, "%s", cJSON_GetObjectItem(cinfo, "location")->valuestring);
-  info.ranking = cJSON_GetObjectItem(cinfo, "ranking")->valuedouble;
-  info.area = cJSON_GetObjectItem(cinfo, "area")->valuedouble;
-
-  cJSON* student = cJSON_GetObjectItem(cinfo, "student");
-  sprintf(info.student.name, "%s", cJSON_GetObjectItem(student, "name")->valuestring);
-  info.student.age = cJSON_GetObjectItem(student, "age")->valuedouble;
-  
-  cJSON *grades = cJSON_GetObjectItem(student, "grades");
-  for (int idx; idx < cJSON_GetArraySize(grades); idx ++)
-  {
-      info.student.grades[idx] = cJSON_GetArrayItem(grades, idx)->valuedouble;
-  }
-  
-  info.student.office = cJSON_GetObjectItem(student, "office")->valueint;
-
-  cJSON *exp = cJSON_GetObjectItem(student, "exp");
-  for (int idx; idx < cJSON_GetArraySize(exp); idx ++)
-  {
-      cJSON *expItem = cJSON_GetArrayItem(exp, idx);
-      sprintf(info.student.exp[idx].address, "%s", cJSON_GetObjectItem(expItem, "address")->valuestring);
-      info.student.exp[idx].date = cJSON_GetObjectItem(expItem, "date")->valuedouble;
-  }
-  
-  cJSON_Delete(info);
-```
-
-> ezJSON解析全部：
-```
-  _ezJSON(err, string)
-  {
-      _VAL("school",   info.school);
-      _VAL("location", info.location);
-      _VAL("ranking",  info.ranking);
-      _VAL("area",     info.area);
-
-      _OBJ("student") 
-      {
-          _VAL("name",   info.student.name);
-          _VAL("age",    info.student.age);
-          
-          _ARR("grades")
-          {
-              _VAL(NULL, info.student.grades[_IDX]);
-          }}
-          
-          _VAL("office", info.student.office);
-          
-          _ARR("exp") {_OBJ(NULL)
-          {
-              _VAL("address", info.student.exp[_IDX].address);
-              _VAL("date",    info.student.exp[_IDX].date);
-          }}}}
-      }}
-  }}
-```
-
-> cJSON解析局部：
-```
-  cJSON* cinfo = cJSON_Parse(string);
-  cJSON* student = cJSON_GetObjectItem(cinfo, "student");
-
-  cJSON *exp = cJSON_GetObjectItem(student, "exp");
-  for (int idx; idx < cJSON_GetArraySize(exp); idx ++)
-  {
-      cJSON *expItem = cJSON_GetArrayItem(exp, idx);
-      sprintf(info.student.exp[idx].address, "%s", cJSON_GetObjectItem(expItem, "address")->valuestring);
-      info.student.exp[idx].date = cJSON_GetObjectItem(expItem, "date")->valuedouble;
-  }
-  
-  cJSON_Delete(info);
-```
-
-> ezJSON解析局部：
-```
-  _ezJSON(err, string)
-  {
-      _OBJ("student") {_ARR("exp") {_OBJ(NULL)
-          {
-              _VAL("address", info.student.exp[_IDX].address);
-              _VAL("date",    info.student.exp[_IDX].date);
-          }}}}
-      }}
-  }}
-```
-
-### 结果
-
-> 构建一百万次用时（ms）：
-
-| 库 \ 次 | 1 | 2 | 3 | 4 | 5 |
-| :----: | :----: | :----: | :----: | :----: | :----: |
-| cJSON  | 10555 | 10568 | 10554 |10613 | 10721 |
-| ezJSON | 5385 | 5291 | 5388 |5430 | 5327 |
-
-> 解析全部一百万次用时（ms）：
-
-| 库 \ 次 | 1 | 2 | 3 | 4 | 5 |
-| :----: | :----: | :----: | :----: | :----: | :----: |
-| cJSON  | 7153 | 6931 | 7649 | 7753 | 6904 |
-| ezJSON | 10663 |10740 | 10807 |10709 | 10536 |
-
-> 解析局部一百万次用时（ms）：
-
-| 库 \ 次 | 1 | 2 | 3 | 4 | 5 |
-| :----: | :----: | :----: | :----: | :----: | :----: |
-| cJSON  | 6334 |6257 | 6330 |6044 | 6163 |
-| ezJSON | 5107 |5028 | 5040 |5172 | 5125 |
-
-# 二、使用步骤
-## 1.引入库
-
-
-<font color=#999AAA >代码如下（示例）：
-
-
-
-```c
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-import warnings
-warnings.filterwarnings('ignore')
-import  ssl
-ssl._create_default_https_context = ssl._create_unverified_context
-```
-
-## 2.读入数据
-
-<font color=#999AAA >代码如下（示例）：
-
-
-
-```c
-data = pd.read_csv(
-    'https://labfile.oss.aliyuncs.com/courses/1283/adult.data.csv')
-print(data.head())
-```
-
-
-
-<font color=#999AAA >该处使用的url网络请求的数据。
-
-<hr style=" border:solid; width:100px; height:1px;" color=#000000 size=1">
-
-# 总结
-<font color=#999AAA >提示：这里对文章进行总结：
-例如：以上就是今天要讲的内容，本文仅仅简单介绍了pandas的使用，而pandas提供了大量能使我们快速便捷地处理数据的函数和方法。
+          ARR("exp", 2

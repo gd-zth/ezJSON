@@ -50,15 +50,11 @@
 
 ### 构建
 
-<font color=#999AAA >**创建构建目标** `void ezJSON(char *string)`；存储到的内存指针 `string`；
-
-<font color=#999AAA >**创建对象类型** `void OBJ(char *key)`；键 `key`，添加到数组填**NULL**；
-
-<font color=#999AAA >**创建数组类型** `void ARR(char *key, int size)`；键 `key`，添加到数组填_NULL_；元素个数`size`，大于**0**表示预设大小，**-1**表示不预设；
-
-<font color=#999AAA >**创建数字类型** `void NUM(char *key, float value)`；键 `key`，添加到数组填_NULL_；键值 `value`；
-<font color=#999AAA >**创建字符类型** `void STR(char *key, char *value)`；键 `key`，添加到数组填_NULL_；键值 `value`；
-
+<font color=#999AAA >**创建构建目标** `void ezJSON(char *string)`；存储到的内存指针 `string`；  
+<font color=#999AAA >**创建对象类型** `void OBJ(char *key)`；键 `key`，添加到数组填**NULL**；  
+<font color=#999AAA >**创建数组类型** `void ARR(char *key, int size)`；键 `key`，添加到数组填_NULL_；元素个数`size`，大于**0**表示预设大小，**-1**表示不预设；  
+<font color=#999AAA >**创建数字类型** `void NUM(char *key, float value)`；键 `key`，添加到数组填_NULL_；键值 `value`；  
+<font color=#999AAA >**创建字符类型** `void STR(char *key, char *value)`；键 `key`，添加到数组填_NULL_；键值 `value`；  
 <font color=#999AAA >**创建布尔类型** `void STR(char *key, int value)`；键 `key`，添加到数组填_NULL_；键值 `value`；
 
 

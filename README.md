@@ -48,7 +48,7 @@
 
 ## API
 
-### 构建
+### 构建相关
 <font color=#999AAA >创建构建目标；内存指针 `string`；
 > void ezJSON( char* string ) ;
 
@@ -70,7 +70,7 @@
 <font color=#999AAA >创建空类型；键 `key`，不能为 __null__；
 > void STR( char *key ) ;
 
-### 解析
+### 解析相关
 
 ## Demo
 

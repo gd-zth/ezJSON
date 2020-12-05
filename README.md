@@ -152,7 +152,7 @@
 ### 代码
 
 #### 构建
-> ezJSON构建全部：
+> ezJSON构建：
 ```
   ezJSON(string)
   {
@@ -178,7 +178,7 @@
   }}
 ```
 
-> cJSON构建全部：
+> cJSON构建：
 ```
   cJSON *cinfo = cJSON_CreateObject();
 
@@ -214,6 +214,7 @@
   cJSON_free(_string);
   cJSON_Delete(info);
 ```
+
 #### 解析
 > ezJSON解析全部：
 ```

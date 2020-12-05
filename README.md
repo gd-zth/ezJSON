@@ -5,6 +5,7 @@
 
 ## 目录
 * [特性](#特性)
+* [定义](#定义)
 * [API](#API)
 * [Demo](#Demo)
   * [构建](#构建)
@@ -22,7 +23,7 @@
 * 高性能：构建目标用时为主流JSON库的一半，对长数据局部解析具有良好的支持。
 * 轻量级：程序基于指针操作，执行过程不申请占用额外的内存。
 
-## API
+## 定义
 
 ### 键值类型
 
@@ -41,15 +42,11 @@
 | 宏定义 | 对应值 | 含义 |
 | :----: | :----: |  :----: |
 | _ezJSON_ERR_NONE| 0 | 无 |
-| _ezJSON_ERR_SYMBOL | -1 | 存在非法字符 |
+| _ezJSON_ERR_SYMBOL | -1 | 非法字符 |
 | _ezJSON_ERR_NOTEXIST | -2 | 键不存在 |
-| _ezJSON_ERR_KEYVALUE | -3 | 键值对格式错误 |
-| _ezJSON_ERR_OBJECT | -4 | 对象类型格式错误 |
-| _ezJSON_ERR_ARRAY | -5 | 数组类型格式错误 |
-| _ezJSON_ERR_STRING | -6 | 字符类型格式错误 |
-| _ezJSON_ERR_NUMBER | -7 | 数字类型格式错误 |
-| _ezJSON_ERR_BOOL | -8 | 布尔类型格式错误 |
-| _ezJSON_ERR_NULL | -9 | 空类型格式错误 |
+| _ezJSON_ERR_FORMAT | -3 | 格式错误 |
+
+## API
 
 ## Demo
 

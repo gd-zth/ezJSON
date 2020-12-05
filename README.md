@@ -61,10 +61,10 @@
 <font color=#999AAA >创建数字类型；键 `key`，为 **null** 表示添加到数组；键值 `value`，**float** 类型；
 > void NUM( char* key , float value ) ;
 
-<font color=#999AAA >创建字符类型；键 `key`，为 **null** 表示添加到数组；键值 `value`，**char *** 类型；   
+<font color=#999AAA >创建字符类型；键 `key`，为 **null** 表示添加到数组；键值 `value`，**char * **类型；   
 > void STR( char* key , char* value ) ;
 
-<font color=#999AAA >创建布尔类型；键 `key`，为 **null** 表示添加到数组；键值 `value`**int** 类型；
+<font color=#999AAA >创建布尔类型；键 `key`，为 **null** 表示添加到数组；键值 `value`，**int** 类型；
 > void STR(char *key, int value) ;
 
 <font color=#999AAA >创建空类型；键 `key`，不能为 **null**；

@@ -86,9 +86,6 @@ MIT License
 <font color=#999AAA >获取键值类型；返回值大于 __0__ 表示 __类型码__，否则表示 __错误码__；键 `key`，为 __null__ 表示上级为数组；
 > int _TYPE( char* key ) ;
 
-### 增删改查
-<font color=#999AAA >内测
-
 ## Demo
 
 ### 内容

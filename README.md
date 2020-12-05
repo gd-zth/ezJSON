@@ -86,7 +86,7 @@
 > int _TYPE( char* key ) ;
 
 ### 增删改查
-<font color=#999AAA >内测中..
+<font color=#999AAA >内测
 
 ## Demo
 
@@ -148,6 +148,7 @@
 ```
 
 ### 代码
+<font color=#999AAA >更多示例见文件夹 __example__ 下的文件代码。
 
 #### 构建
 > 使用ezJSON构建：

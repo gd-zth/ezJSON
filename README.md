@@ -15,7 +15,7 @@
 
 ## 特性
 
-* 人性化：基于Json数据结构的设计，代码清晰简洁。
+* 人性化：基于Json数据结构的设计，代码简洁，可读性强。
 * 高性能：构建目标用时为主流JSON库的一半，对长数据局部解析具有良好的支持。
 * 轻量级：程序基于指针操作，执行过程不申请占用额外的内存。
 
@@ -82,10 +82,10 @@
   } INFO, pINFO;
 ```
 
-### 代码
+### 示例代码
 
 #### 构建
-> cJSON构建全部（示例）：
+> cJSON构建全部：
 ```
   cJSON *cinfo = cJSON_CreateObject();
 
@@ -122,7 +122,7 @@
   cJSON_Delete(info);
 ```
 
-> ezJSON构建全部（示例）：
+> ezJSON构建全部：
 ```
   ezJSON(string)
   {
@@ -153,7 +153,7 @@
 ```
 
 #### 解析
-> cJSON解析全部（示例）：
+> cJSON解析全部：
 ```
   cJSON* cinfo = cJSON_Parse(string);
 
@@ -185,7 +185,7 @@
   cJSON_Delete(info);
 ```
 
-> ezJSON解析全部（示例）：
+> ezJSON解析全部：
 ```
   _ezJSON(err, string)
   {
@@ -215,7 +215,7 @@
   }}
 ```
 
-> cJSON解析局部（示例）：
+> cJSON解析局部：
 ```
   cJSON* cinfo = cJSON_Parse(string);
   cJSON* student = cJSON_GetObjectItem(cinfo, "student");
@@ -231,7 +231,7 @@
   cJSON_Delete(info);
 ```
 
-> ezJSON解析局部（示例）：
+> ezJSON解析局部：
 ```
   _ezJSON(err, string)
   {

@@ -36,7 +36,9 @@ MIT License
 ## 使用
 ### 前言
 <font color=#999AAA >ezJSON 命名自单词 easy 的谐音，目标是实现以精简的代码实现对复杂数据的处理，包含了一个C文件和一个头文件，对于小容量 MCU 芯片具有良好的支持。库具备以下特性：
-<font color=#999AAA ><p style="text-indent:2em">人性化，相同于Json协议的结构设计，代码简洁，可读性强；</p><font color=#999AAA ><p style="text-indent:2em">高性能，超快的构建速度，支持查询式解析；</p><font color=#999AAA ><p style="text-indent:2em">轻量级，静态库大小仅有1.7K，接口消耗内存极小。</p>
+人性化，相同于Json协议的结构设计，代码简洁，可读性强；
+高性能，超快的构建速度，支持查询式解析；
+轻量级，静态库大小仅有1.7K，接口消耗内存极小。
 
 ### 编译
 <font color=#999AAA >由于整个库只有一个 C 文件和一个头文件，因此您只需将包含副本 __zJSON.c__ 和 __zJSON.h__ 的文件夹复制到项目源,并添加以下内容：

@@ -8,7 +8,6 @@
 * [特性](#特性)
 * [使用](#使用)
 * [API](#APIs)
-* [Demo](#Demo)
 * [性能测试](#性能测试)
 * [参数](#参数与支持)
 
@@ -34,13 +33,14 @@ MIT License
 >  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 >  SOFTWARE.
 
-## 特性
-
-* 人性化：基于Json数据结构的设计，代码简洁，可读性强。
-* 高性能：构建目标用时为主流JSON库的一半，对长数据局部解析具有良好的支持。
-* 轻量级：程序指针操作，执行过程不申请占用额外的内存。
-
 ## 使用
+### 前言
+<font color=#999AAA >ezJSON 命名自单词 easy 的谐音，目标是实现以精简的代码实现对复杂数据的处理，包含了一个C文件和一个头文件，对于小容量 MCU 芯片具有良好的支持。库具备以下特性：
+<font color=#999AAA >&#8194&#8194&#8194&#8194人性化，相同于Json协议的结构设计，代码简洁，可读性强；
+<font color=#999AAA >&#8194&#8194&#8194&#8194高性能，超快的构建速度，支持查询式解析；
+<font color=#999AAA >&#8194&#8194&#8194&#8194轻量级，静态库大小仅有1.7K，接口消耗内存极小。
+
+### 编译
 <font color=#999AAA >由于整个库只有一个 C 文件和一个头文件，因此您只需将包含副本 __zJSON.c__ 和 __zJSON.h__ 的文件夹复制到项目源,并添加以下内容：
 ```
 #include <ezJSON/ezJSON.h>
@@ -86,9 +86,11 @@ MIT License
 <font color=#999AAA >获取键值类型；返回值大于 __0__ 表示 __类型码__，否则表示 __错误码__；键 `key`，为 __null__ 表示上级为数组；
 > int _TYPE( char* key ) ;
 
-## Demo
+## 性能测试
+<font color=#999AAA >测试平台使用的是阿里云单核CPU、2G内存的服务器，搭载有64位Ubuntu18.04系统。对目标字符串进行一百万次循环的构建、全部解析和局部解析，分别使用两种库进行5次计时测试。
 
-### 内容
+### 测试内容
+
 > 目标字符串：
 ```
   {
@@ -145,10 +147,7 @@ MIT License
   } INFO, pINFO;
 ```
 
-### 代码
-<font color=#999AAA >更多示例见文件夹 __example__ 下的文件代码。
-
-#### 构建
+### 测试代码
 > 使用ezJSON构建：
 ```
   ezJSON(string)
@@ -175,7 +174,6 @@ MIT License
   }}
 ```
 
-#### 解析
 > 使用ezJSON解析全部：
 ```
   _ezJSON(NULL, string)
@@ -215,122 +213,14 @@ MIT License
   }}
 ```
 
+### 结果
+<font color=#999AAA >五场测试执行一百万次循环用时（单位：ms）：
 
-
-### 性能测试
-<font color=#999AAA >测试平台使用的是阿里云单核CPU、2G内存的服务器，搭载有64位Ubuntu18.04系统，这里加入目前最主流的C语言库“cJSON” 进行对比测试。
-
-#### 测试内容
-<font color=#999AAA >对 __Demo__ 中的目标字符串进行一百万次循环的构建、全部解析和局部解析，分别使用两种库进行5次计时测试。
-
-#### cJSON测试代码
-> 构建：
-```
-  cJSON *cinfo = cJSON_CreateObject();
-
-  cJSON_AddStringToObject(cinfo, "school", info.school);
-  cJSON_AddStringToObject(cinfo, "location", info.location);
-  cJSON_AddNumberToObject(cinfo, "ranking", info.ranking);
-  cJSON_AddNumberToObject(cinfo, "area", info.area);
-
-  cJSON *student = cJSON_CreateObject();
-  cJSON_AddStringToObject(student, "name", info.student.name);
-  cJSON_AddNumberToObject(student, "age", info.student.age);
-
-  cJSON *grades = cJSON_CreateFloatArray(info.student.grades, 3);
-  cJSON_AddItemToObject(student, "grades", grades);
-    
-  cJSON_AddBoolToObject(student, "office", info.student.office);
-
-  cJSON *exp = cJSON_CreateArray();
-  for (int idx = 0; idx <2 ; idx ++) 
-  {
-      cJSON *expItem = cJSON_CreateObject();
-      cJSON_AddStringToObject(expItem, "address", info.student.exp[idx].address);
-      cJSON_AddNumberToObject(expItem, "date", info.student.exp[idx].date);
-      cJSON_AddItemToArray(exp, expItem);
-  }
-  cJSON_AddItemToObject(student, "exp", exp);
-
-  cJSON_AddItemToObject(cinfo, "student", student);
-
-  char *_string = cJSON_PrintUnformatted(info);
-  strcpy(string, _string);
-
-  cJSON_free(_string);
-  cJSON_Delete(info);
-```
-
-> 解析全部：
-```
-  cJSON* cinfo = cJSON_Parse(string);
-
-  strcpy(info.school, cJSON_GetObjectItem(cinfo, "school")->valuestring);
-  strcpy(info.location, cJSON_GetObjectItem(cinfo, "location")->valuestring);
-  info.ranking = cJSON_GetObjectItem(cinfo, "ranking")->valuedouble;
-  info.area = cJSON_GetObjectItem(cinfo, "area")->valuedouble;
-
-  cJSON* student = cJSON_GetObjectItem(cinfo, "student");
-
-  strcpy(info.student.name, cJSON_GetObjectItem(student, "name")->valuestring);
-  info.student.age = cJSON_GetObjectItem(student, "age")->valuedouble;
-  cJSON *grades = cJSON_GetObjectItem(student, "grades");
-  for (int idx = 0; idx < cJSON_GetArraySize(grades); idx ++)
-  {
-      info.student.grades[idx] = cJSON_GetArrayItem(grades, idx)->valuedouble;
-  }
-
-  info.student.office = cJSON_GetObjectItem(student, "office")->valueint;
-
-  cJSON *exp = cJSON_GetObjectItem(student, "exp");
-  cJSON *expItem  = exp->child;
-  for (int idx = 0; expItem != NULL; idx ++)
-  {
-      strcpy(info.student.exp[idx].address, cJSON_GetObjectItem(expItem, "address")->valuestring;
-      info.student.exp[idx].date = cJSON_GetObjectItem(expItem, "date")->valuedouble;
-      expItem  = expItem->next;
-  }
-
-  cJSON_Delete(cinfo);
-```
-
-> 解析局部：
-```
-  cJSON* cinfo = cJSON_Parse(string);
-
-  strcpy(info.school, cJSON_GetObjectItem(cinfo, "school")->valuestring);
-  cJSON* student = cJSON_GetObjectItem(cinfo, "student");
-
-  cJSON *exp = cJSON_GetObjectItem(student, "exp");
-  cJSON *expItem  = exp->child;
-  for (int idx = 0; expItem != NULL; idx ++)
-  {
-      strcpy(info.student.exp[idx].address, cJSON_GetObjectItem(expItem, "address")->valuestring;
-      info.student.exp[idx].date = cJSON_GetObjectItem(expItem, "date")->valuedouble;
-      expItem  = expItem->next;
-  }
-
-  cJSON_Delete(cinfo);
-```
-
-#### 结果
-<font color=#999AAA >执行构建代码用时（ms）：
-| 库 \ 次 | 1 | 2 | 3 | 4 | 5 |
+| 内容 \ 场| 1 | 2 | 3 | 4 | 5 |
 | :----: | :----: | :----: | :----: | :----: | :----: |
-| cJSON  | 10555 | 10568 | 10554 |10613 | 10721 |
-| ezJSON | 5385 | 5291 | 5388 |5430 | 5327 |
-
-<font color=#999AAA >执行全部解析代码用时（ms）：
-| 库 \ 次 | 1 | 2 | 3 | 4 | 5 |
-| :----: | :----: | :----: | :----: | :----: | :----: |	
-| cJSON  | 7153 | 6931 | 7649 | 7753 | 6904 |
-| ezJSON | 10709 |10663 | 10807 |10740 | 10536 |
-
-<font color=#999AAA >构建局部解析代码用时（ms）：
-| 库 \ 次 | 1 | 2 | 3 | 4 | 5 |
-| :----: | :----: | :----: | :----: | :----: | :----: |
-| cJSON  | 6334 | 6257 | 6330 | 6044 | 6163 |
-| ezJSON | 5107 |5028 | 5040 |5172 | 5125 |
+| 构建全部 | 5385 | 5291 | 5388 |5430 | 5327 |
+| 解析全部 | 10709 |10663 | 10807 |10740 | 10536 |
+| 解析部分 | 5107 |5028 | 5040 |5172 | 5125 |
   
 ## 参数与支持
 

@@ -6,7 +6,7 @@ typedef struct DATASTRUCT
 {
     char    strings[3][16];
     float   numbers[3];
-    struct
+    struct 
     {
         char    string[16];
         float   number;

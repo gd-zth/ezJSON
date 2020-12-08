@@ -84,15 +84,15 @@ MIT License
   {
       "title": "object test",
 
-      "object1": 
+      "object_1": 
       {
-          "string": "this is object1 string",
+          "string": "this is object_1 string",
           "number": 10.01,
           "bool": true,
         
-          "object2":
+          "object_2":
           {
-              "string": "this is object2 string",
+              "string": "this is object_2 string",
               "number": 10.02,
               "bool": false
           }
@@ -129,15 +129,15 @@ MIT License
   {
       STR("title", "object test");
       
-      OBJ("object1")
+      OBJ("object_1")
       {
-          STR("string", "this is object1 string");
+          STR("string", "this is object_1 string");
           NUM("number", 10.01);
           BOL("bool", 1);
           
-          OBJ("object2")
+          OBJ("object_2")
           {
-              STR("string", "this is object2 string");
+              STR("string", "this is object_2 string");
               NUM("number", 10.02);
               BOL("bool", 0);
           }}
@@ -151,13 +151,13 @@ MIT License
   {
       _VAL("title", data.title);
       
-      _OBJ("object1")
+      _OBJ("object_1")
       {
           _VAL("string", data.object1.string);
           _VAL("number", data.object1.number);
           _VAL("bool",   data.object1.bool);
     
-          _OBJ("object2")
+          _OBJ("object_1")
           {
               _VAL("string", data.object1.object2.string);
               _VAL("number", data.object1.object2.number);
@@ -229,23 +229,23 @@ MIT License
   ezJSON(jsonStr)
   {
       // 使用索引
-      ARR("array1", 3) { STR(NULL, string[_IDX]); }}
+      ARR("strings", 3) { STR(NULL, string[_IDX]); }}
 
       // 不使用索引
-      ARR("array2", -1)
+      ARR("numbers", -1)
       {
           NUM(NULL, number[0]);
           NUM(NULL, number[1]);
           NUM(NULL, number[2]);
       }}
 
-      ARR("array3", 3) {OBJ(NULL) 
+      ARR("objects", 3) {OBJ(NULL) 
       {
           STR("string", string[_IDX]);
           NUM("number", number[_IDX]);
       }}}}
         
-      ARR("array4", -1)
+      ARR("arrays", -1)
       {
           ARR(NULL, 3) { STR(NULL, string[_IDX]); }}
           ARR(NULL, 3) { NUM(NULL, number[_IDX]); }}

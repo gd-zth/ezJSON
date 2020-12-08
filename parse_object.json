@@ -1,15 +1,15 @@
 {
     "title": "object test",
 
-    "object1": 
+    "object_1": 
     {
-        "string": "this is object1 string",
+        "string": "this is object_1 string",
         "number": 10.01,
         "bool": true,
       
-        "object2":
+        "object_2":
         {
-            "string": "this is object2 string",
+            "string": "this is object_2 string",
             "number": 10.02,
             "bool": false
         }

@@ -1,0 +1,17 @@
+{
+    "title": "object test",
+
+    "object1": 
+    {
+        "string": "this is object1 string",
+        "number": 10.01,
+        "bool": true,
+      
+        "object2":
+        {
+            "string": "this is object2 string",
+            "number": 10.02,
+            "bool": false
+        }
+    }
+}

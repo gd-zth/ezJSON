@@ -1,0 +1,22 @@
+{
+    "strings":     [     "one"    ,   "two"    ,   "three"  ]   ,   
+    "numbers": [1, 2, 3],
+    "objects": [
+        {
+            "string": "one",
+            "number": 1
+        },
+        {
+            "string": "two",
+            "number": 2
+        },
+        {
+            "string": "three",
+            "number": 3
+        }
+    ],
+    "arrays": [
+        ["one", "two", "three"],
+        [1, 2, 3]
+    ]
+}

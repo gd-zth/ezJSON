@@ -57,7 +57,7 @@ void _ezJsonClear(char *content) ;
 int _ezJsonErr(int err) ;
 int _ezJsonGetType(char *content, int *err, char *key) ;
 char *_ezJsonGetObject(char *content, int *err, char *key) ;
-char *_ezJsonGetArray(char *content, int *err, int *size, char *key) ;
+char *_ezJsonGetArray(char **content, int *err, int *size, char *key) ;
 char *_ezJsonGetValue(char *content, int *err, char *key, void *value) ;
 
 #define ezJSON(_CONTENT) {\
@@ -75,9 +75,11 @@ char *_ezJsonGetValue(char *content, int *err, char *key, void *value) ;
             _ezJsonPostArray(_ezJSON_CONTENT, _ezJSON_KEY);\
             int ezJSON_IDX;\
             int _IDX;\
+            int ezJSON_SIZE = _ezJSON_ARRAY_SIZE;\
+            if (0 > _ezJSON_ARRAY_SIZE)\
+                ezJSON_SIZE = 1;\
             for (ezJSON_IDX = 0; ezJSON_IDX++ < 1; _ezJsonPostArrayEnd(_ezJSON_CONTENT))\
-                if (0 > _ezJSON_ARRAY_SIZE)\
-                    for (_IDX = 0; _IDX < _ezJSON_ARRAY_SIZE; _IDX ++)
+                for (_IDX = 0; _IDX < ezJSON_SIZE; _IDX ++)
 
 #define NUM(_ezJSON_KEY, _ezJSON_VALUE)\
             _ezJsonPostNumber(_ezJSON_CONTENT, _ezJSON_KEY, _ezJSON_VALUE);
@@ -92,38 +94,53 @@ char *_ezJsonGetValue(char *content, int *err, char *key, void *value) ;
             _ezJsonPostNull(_ezJSON_CONTENT, _ezJSON_KEY);
 
 #define _ezJSON(_ERR, _CONTENT) {\
+            if (NULL == _CONTENT)\
+                goto _ezJSON_END;\
             char *_ezJSON_CONTENT = _CONTENT;\
             int _ezJSON_ERR = ezJSON_ERR_NONE;\
-            int *_ezJSON_ERR_P = &_ezJSON_ERR;\
-            if (NULL != _ERR)\
-                _ezJSON_ERR_P = _ERR;\
+            int *_ezJSON_ERR_POINT = &_ezJSON_ERR;\
+            int _ezJSON_ERR_LOCK = 0;\
+            if (NULL != _ERR){\
+                _ezJSON_ERR_POINT = _ERR;\
+                _ezJSON_ERR_LOCK = 1;\
+            }\
             int ezJSON_IDX;\
-            for (ezJSON_IDX = 0; ezJSON_IDX++ < 1; *_ezJSON_ERR_P = _ezJSON_ERR)
+            for (ezJSON_IDX = 0; ezJSON_IDX++ < 1; *_ezJSON_ERR_POINT = _ezJSON_ERR)
+
+#define _END_\
+            _ezJSON_END:\
+            _ezJSON_ERR = _ezJSON_ERR;
 
 #define _OBJ(_ezJSON_KEY) _ezJsonErr(_ezJSON_ERR); {\
+            if (0 > _ezJSON_ERR && 1 == _ezJSON_ERR_LOCK)\
+                goto _ezJSON_END;\
             char **__ezJSON_CONTENT = &_ezJSON_CONTENT;\
             char *_ezJSON_CONTENT = *__ezJSON_CONTENT;\
-            if (0 == _ezJSON_ERR)\
-                if (NULL == _ezJSON_KEY)\
-                    *__ezJSON_CONTENT = _ezJsonGetObject(_ezJSON_CONTENT, &_ezJSON_ERR, _ezJSON_KEY);\
-                else\
-                    _ezJSON_CONTENT = _ezJsonGetObject(_ezJSON_CONTENT, &_ezJSON_ERR, _ezJSON_KEY);
+            char *_ezJSON_POINT = _ezJsonGetObject(_ezJSON_CONTENT, &_ezJSON_ERR, _ezJSON_KEY);\
+            if (NULL == _ezJSON_KEY)\
+                *__ezJSON_CONTENT = _ezJSON_POINT;\
+            else\
+                _ezJSON_CONTENT = _ezJSON_POINT;
 
 #define _ARR(_ezJSON_KEY) _ezJsonErr(_ezJSON_ERR); {\
+            if (0 > _ezJSON_ERR && 1 == _ezJSON_ERR_LOCK)\
+                goto _ezJSON_END;\
             char **__ezJSON_CONTENT = &_ezJSON_CONTENT;\
             char *_ezJSON_CONTENT = *__ezJSON_CONTENT;\
             int zJSON_ARRAY_SIZE = 0;\
-            if (0 == _ezJSON_ERR)\
-                _ezJSON_CONTENT = _ezJsonGetArray(_ezJSON_CONTENT, &_ezJSON_ERR, &zJSON_ARRAY_SIZE, _ezJSON_KEY);\
+            char *_ezJSON_POINT = _ezJsonGetArray(&_ezJSON_CONTENT, &_ezJSON_ERR, &zJSON_ARRAY_SIZE, _ezJSON_KEY);\
+            if (NULL == _ezJSON_KEY)\
+                *__ezJSON_CONTENT = _ezJSON_POINT;\
             int _IDX;\
             for(_IDX = 0; _IDX < zJSON_ARRAY_SIZE; _IDX ++)
 
 #define _VAL(_ezJSON_KEY, _ezJSON_VALUE) _ezJsonErr(_ezJSON_ERR);\
-            if (0 == _ezJSON_ERR)\
-                if (NULL == _ezJSON_KEY)\
-                    _ezJSON_CONTENT = _ezJsonGetValue(_ezJSON_CONTENT, &_ezJSON_ERR, _ezJSON_KEY, &_ezJSON_VALUE);\
-                else\
-                    _ezJsonGetValue(_ezJSON_CONTENT, &_ezJSON_ERR, _ezJSON_KEY, (void *)(&_ezJSON_VALUE));
+            if (0 > _ezJSON_ERR && 1 == _ezJSON_ERR_LOCK)\
+                goto _ezJSON_END;\
+            if (NULL == _ezJSON_KEY)\
+                _ezJSON_CONTENT = _ezJsonGetValue(_ezJSON_CONTENT, &_ezJSON_ERR, _ezJSON_KEY, &_ezJSON_VALUE);\
+            else\
+                _ezJsonGetValue(_ezJSON_CONTENT, &_ezJSON_ERR, _ezJSON_KEY, (void *)(&_ezJSON_VALUE));
 
 #define _TYPE(_ezJSON_KEY)\
                 _ezJsonGetType(_ezJSON_CONTENT, &_ezJSON_ERR, _ezJSON_KEY)

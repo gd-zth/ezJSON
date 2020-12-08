@@ -59,14 +59,14 @@ MIT License
 
 ### 参数
 <font color=#999AAA >ezJSON 支持以下几种参数类型：
-| 宏定义 | 对应值 | 键类型 | 符号 | 变量类型 |
-| :----: | :----: |  :----: | :----: | :----: | 
-| _ezJSON_OBJECT| 1 | 对象 | { } | - |
-| _ezJSON_ARRAY | 2 | 数组 | [ ] | - | 
-| _ezJSON_STRING | 3 | 字符串 | " " | char[] |
-| _ezJSON_NUMBER | 4 | 数字 | 0~9, '.', '-'| float |
-| _ezJSON_BOOL | 5 | 布尔 | false, ture | int |
-| _ezJSON_NULL | 6 | 空 | null | NULL |
+| 类型 | 宏定义 | | 变量类型 |
+| :----: |  :----:  | :----: |
+ | 对象 | _ezJSON_OBJECT | - |
+ | 数组 | _ezJSON_ARRAY| - | 
+ | 字符串 | _ezJSON_STRING | char[] |
+ | 数字 | | _ezJSON_NUMBERfloat |
+ | 布尔 | _ezJSON_BOOL | int |
+ | 空 | _ezJSON_NULL | NULL |
 
 ### 示例
 

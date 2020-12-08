@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
     float number[3] = {1, 2, 3};
 
     ezJSON(jsonStr)
-    {
+    { 
         // 使用索引
         ARR("array1", 3) { STR(NULL, string[_IDX]); }}
 

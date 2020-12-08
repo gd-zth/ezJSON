@@ -16,9 +16,9 @@ typedef struct DATASTRUCT
             float   number;
             int     bool;
             
-        }object2;
+        }object_2;
         
-    }object1;
+    }object_1;
 
 } Data;
 
@@ -43,15 +43,15 @@ int main(int argc, char *argv[])
 
         _OBJ("object_1")
         {
-            _VAL("string", data.object1.string);
-            _VAL("number", data.object1.number);
-            _VAL("bool",   data.object1.bool);
+            _VAL("string", data.object_1.string);
+            _VAL("number", data.object_1.number);
+            _VAL("bool",   data.object_1.bool);
 
             _OBJ("object_2")
             {
-                _VAL("string", data.object1.object2.string);
-                _VAL("number", data.object1.object2.number);
-                _VAL("bool",   data.object1.object2.bool);
+                _VAL("string", data.object_1.object_2.string);
+                _VAL("number", data.object_1.object_2.number);
+                _VAL("bool",   data.object_1.object_2.bool);
             }}
         }}
 

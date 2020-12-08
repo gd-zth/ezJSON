@@ -64,7 +64,7 @@ MIT License
  | 对象 | _ezJSON_OBJECT | - |
  | 数组 | _ezJSON_ARRAY| - | 
  | 字符串 | _ezJSON_STRING | char[] |
- | 数字 | | _ezJSON_NUMBERfloat |
+ | 数字 | _ezJSON_NUMBER | float |
  | 布尔 | _ezJSON_BOOL | int |
  | 空 | _ezJSON_NULL | NULL |
 

@@ -4,7 +4,7 @@
 
 int main(int argc, char *argv[])
 {
-    char jsonStr[1024];
+    char jsonStr[1024]; 
 
     ezJSON(jsonStr)
     {

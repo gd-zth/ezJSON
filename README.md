@@ -71,7 +71,7 @@ MIT License
 ### 示例
 
 #### 基本结构
-<font color=#999AAA >构建字符串时请使用 `ezJSON()` 和 `双括号` 结尾，以下是一个标准的构建结构：
+<font color=#999AAA >构建数据请使用 `ezJSON()` 和 `双括号` 结尾，以下是一个标准的构建结构：
 ```
   ezJSON(jsonStr) 
   {
@@ -81,7 +81,7 @@ MIT License
       NUL("null"); 
   }}
 ```
-<font color=#999AAA >解析字符串时请使用 `_ezJSON()` 和 `}_END_}` 结尾，`errPtr` 为 _int_ 型变量的指针，以下是一个标准的解析结构：
+<font color=#999AAA >解析数据请使用 `_ezJSON()` 和 `}_END_}` 结尾，`errPtr` 为 _int_ 型变量的指针，以下是一个标准的解析结构：
 ```
   _ezJSON(errPtr, jsonStr) 
   {

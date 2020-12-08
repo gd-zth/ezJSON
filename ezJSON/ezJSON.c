@@ -67,6 +67,9 @@ void _ezJsonPostObjectEnd(char *content)
 {
     content += strlen(content) - 1;
 
+    if (',' != *content)
+        content ++;
+
     *(content ++) = '}';
     *(content ++) = ',';
     *content = '\0';
@@ -78,14 +81,15 @@ void _ezJsonPostArray(char *content, char *key)
 
     content += strlen(content);
 
+    if (NULL != key) {
     *(content ++) = '\"';
+        int sizeKey = strlen(key);
+        for(idx = 0; idx < sizeKey; idx ++)
+            *(content ++) = *(key + idx);
+        *(content ++) = '\"';
+        *(content ++) = ':';
+    }
 
-    int sizeKey = strlen(key);
-    for(idx = 0; idx < sizeKey; idx ++)
-        *(content ++) = *(key + idx);
-
-    *(content ++) = '\"';
-    *(content ++) = ':';
     *(content ++) = '[';
     *content = '\0';
 }
@@ -93,6 +97,9 @@ void _ezJsonPostArray(char *content, char *key)
 void _ezJsonPostArrayEnd(char *content)
 {
     content += strlen(content) - 1;
+
+    if (',' != *content)
+        content ++;
 
     *(content ++) = ']';
     *(content ++) = ',';
@@ -295,6 +302,8 @@ int _ezJsonErr(int err)
 
 static char *__ezJsonGetValueStart(char *content, int *err)
 {
+    *err = 0;
+
     char *endPtr = content + strlen(content);
 
     for( ;'\0' != *content && content < endPtr; content ++) {
@@ -305,6 +314,7 @@ static char *__ezJsonGetValueStart(char *content, int *err)
         case '\n':
         case '\r':
         case '\t':
+        case ',':
             break;
         case '\"':
         case '{':
@@ -322,6 +332,7 @@ static char *__ezJsonGetValueStart(char *content, int *err)
         {
             if (0x30 > *content || 0x39 < *content)
                 *err = ezJSON_ERR_FORMAT;
+
             goto END;
         }
             break;
@@ -333,6 +344,8 @@ END:
 
 static char *__ezJsonGetTargetStart(char *content, int *err, char *key)
 {
+    *err = 0;
+
     int _curlyBraces = -1;
     int _doubleQuotes = 1;
 
@@ -405,95 +418,7 @@ FIND:
         }
     NEXT:
         content = __ezJsonGetValueStart(content + 1, err);
-        if (0 != *err)
-            goto END;
-    } else
-        goto FIND;
-
-END:
-    return content;
-}
-
-static char *___ezJsonGetTargetStart(char *content, int *err, char *key)
-{
-    int _curlyBraces = -1;
-    int _doubleQuotes = 1;
-
-    char *_object;
-    char *_point;
-
-    size_t sizeKey = strlen(key);
-    char *endPtr = content + strlen(content);
-    char find[64];
-
-    sprintf(find, "\"%s\"", key);
-
-FIND:
-    _object = strstr(content, find);
-
-    if (NULL == _object) {
-        *err = ezJSON_ERR_NOTEXIST;
-        goto END;
-    }
-
-_object++;
-
-    _point = content;
-
-    for ( ; _point < _object + sizeKey && '\0' != *_point && endPtr > _point; _point ++) {
-        switch (*_point) {
-        case '{':
-        case '[':
-        {
-            if (0 < _doubleQuotes) 
-                _curlyBraces ++;
-        }
-            break;
-        case ']':
-        case '}':
-        {
-            if (0 < _doubleQuotes) 
-                _curlyBraces --;
-        }
-            break;
-        case '\"':
-        {
-            int _existSlash = 1;
-            char *__point = _point - 1;
-
-            while(content <= __point && '\\' == *__point) {
-                _existSlash = -_existSlash;
-                __point --;
-            }
-
-            if (0 < _existSlash)
-                _doubleQuotes = -_doubleQuotes;
-        }
-            break;
-        }
-    }
-
-    content = _object + sizeKey;
-
-    if ('\"' == *(_object-1) && '\"' == *content) {
-        for(content ++; '\0' != *content && content < endPtr; content ++) {
-            switch(*content) {
-            case ' ':
-                break;
-            default:
-            {
-                if (':' == *content && 0 == _curlyBraces)
-                    goto NEXT;
-
-                content = _object + sizeKey;
-                goto FIND;
-            }
-                break;
-            }
-        }
-    NEXT:
-        content = __ezJsonGetValueStart(content + 1, err);
-        if (0 != *err)
+        if (0 > *err)
             goto END;
     } else
         goto FIND;
@@ -504,6 +429,8 @@ END:
 
 static char *__ezJsonGetTargetStop(char *content, int *err, int *type)
 {
+    *err = 0;
+
     char *revalue = NULL;
     char *_point = content;
     char *endPtr = content + strlen(content);
@@ -692,6 +619,8 @@ END:
 
 int _ezJsonGetType(char *content, int *err, char *key)
 {
+    *err = 0;
+
     int revalue = 0;
     char *begin = content;
 
@@ -714,12 +643,14 @@ END:
 
 char *_ezJsonGetObject(char *content, int *err, char *key)
 {
+    *err = 0;
+
     char *revalue = content;
     char *begin = content;
 
     if (NULL != key) {
         begin = __ezJsonGetTargetStart(content, err, key);
-        if (0 != *err)
+        if (0 > *err)
             goto END;
 
         revalue = begin;
@@ -730,7 +661,7 @@ char *_ezJsonGetObject(char *content, int *err, char *key)
 
         int type;
         char *end = __ezJsonGetTargetStop(begin, err, &type);
-        if (0 != *err)
+        if (0 > *err)
             goto END;
 
         revalue = end + 1;
@@ -740,23 +671,22 @@ END:
     return revalue;
 }
 
-char *ezJsonGetObjectEnd(char *object, char *content, char *key)
+char *_ezJsonGetArray(char **content, int *err, int *size, char *key)
 {
-    if (NULL == key)
-        return content;
+    *err = 0;
+    char *revalue = *content;
+    char *begin = *content;
+
+    char *endPtr = *content + strlen(*content);
+
+    if (NULL != key)
+        begin = __ezJsonGetTargetStart(*content, err, key);
     else
-        return object;
-}
-
-char *_ezJsonGetArray(char *content, int *err, int *size, char *key)
-{
-    char *revalue = content;
-
-    revalue = __ezJsonGetTargetStart(content, err, key);
+        begin = __ezJsonGetValueStart(*content, err);
 
     int type;
-    char *end = __ezJsonGetTargetStop(revalue, err, &type);
-    if (0 != *err)
+    char *end = __ezJsonGetTargetStop(begin, err, &type);
+    if (0 > *err)
         goto END;
 
     if (ezJSON_ARRAY != type) {
@@ -767,9 +697,9 @@ char *_ezJsonGetArray(char *content, int *err, int *size, char *key)
     int _existComma = 0;
     int _doubleQuotes = 1;
     int _curlyBraces = 0;
-    char *_point;
+    char *_point = begin;
 
-    for (_point = revalue; '\0' != *_point && (']' != *(_point-1) || 0 != _curlyBraces); _point ++) {
+    for (; '\0' != *_point && endPtr > _point && (']' != *(_point-1) || 0 != _curlyBraces); _point ++) {
         switch(*_point) {
         case ',':
         {
@@ -796,7 +726,7 @@ char *_ezJsonGetArray(char *content, int *err, int *size, char *key)
             int _existSlash = 1;
             char *__point = _point - 1;
 
-            while(content <= __point && '\\' == *__point) {
+            while(*content <= __point && '\\' == *__point) {
                 _existSlash = -_existSlash;
                 __point --;
             }
@@ -813,12 +743,19 @@ char *_ezJsonGetArray(char *content, int *err, int *size, char *key)
     if (0 == _existComma)
         *size = 0;
 
+    if (NULL == key)
+        revalue = __ezJsonGetValueStart(_point, err);
+
+    *content = begin + 1;
+
 END:
-    return revalue + 1;
+    return revalue;
 }
 
 char *_ezJsonGetValue(char *content, int *err, char *key, void *value)
 {
+    *err = 0;
+
     char *revalue = content;
     char *begin = content;
 
@@ -827,7 +764,6 @@ char *_ezJsonGetValue(char *content, int *err, char *key, void *value)
         if (0 > *err)
             goto END;
     }
-
     begin = __ezJsonGetValueStart(begin, err);
     if (0 > *err)
         goto END;
@@ -838,8 +774,8 @@ char *_ezJsonGetValue(char *content, int *err, char *key, void *value)
         goto END;
 
     if (NULL == key) {
-        revalue = __ezJsonGetValueStart(end + 1, err);
-        if (0 != *err)
+        revalue = __ezJsonGetValueStart(end, err);
+        if (0 > *err)
             goto END;
     }
 
@@ -890,12 +826,11 @@ char *_ezJsonGetValue(char *content, int *err, char *key, void *value)
         }
 
         *_value = '\0';
-
-        if (NULL == key)
-            revalue += 1;
     }
         break;
     }
+
+    *err = type;
 
 END:
     return revalue;

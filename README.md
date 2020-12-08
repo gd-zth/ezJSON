@@ -1,6 +1,6 @@
 
 # ezJSON
-<font color=#999AAA >C语言下的人性化、高性能、轻量级JSON库
+<font color=#999AAA >C语言下人性化、高性能、轻量级的JSON库
 <hr style=" border:solid; width:100px; height:1px;" color=#000000 size=1">
 
 ## 目录

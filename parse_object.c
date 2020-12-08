@@ -41,13 +41,13 @@ int main(int argc, char *argv[])
     {
         _VAL("title", data.title);
 
-        _OBJ("object1")
+        _OBJ("object_1")
         {
             _VAL("string", data.object1.string);
             _VAL("number", data.object1.number);
             _VAL("bool",   data.object1.bool);
 
-            _OBJ("object2")
+            _OBJ("object_2")
             {
                 _VAL("string", data.object1.object2.string);
                 _VAL("number", data.object1.object2.number);

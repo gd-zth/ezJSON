@@ -8,6 +8,7 @@
 * [使用](#使用)
   * [特性](#特性)
   * [编译](#编译)
+  * [支持](#支持)
   * [示例](#构建和解析)
     * [基本类型](#基本类型)
     * [object对象](#object对象)
@@ -55,6 +56,16 @@ MIT License
 ```
 #include <ezJSON/ezJSON.h>
 ```
+
+### 支持
+| 宏定义 | 对应值 | 键类型 | 符号 | 变量类型 |
+| :----: | :----: |  :----: | :----: | :----: | 
+| _ezJSON_OBJECT| 1 | 对象 | { } | - |
+| _ezJSON_ARRAY | 2 | 数组 | [ ] | - | 
+| _ezJSON_STRING | 3 | 字符串 | " " | char[] |
+| _ezJSON_NUMBER | 4 | 数字 | 0~9, '.', '-'| float |
+| _ezJSON_BOOL | 5 | 布尔 | false, ture | int |
+| _ezJSON_NULL | 6 | 空 | null | NULL |
 
 ### 示例
 
@@ -327,17 +338,7 @@ MIT License
 ```
 
 #### 类型检测
-<font color=#999AAA >在执行解析动作前，可使用 `_TYPE()` 预先获取键值的类型。ezJSON支持的文本类型如下：
-| 宏定义 | 对应值 | 键类型 | 符号 | 变量类型 |
-| :----: | :----: |  :----: | :----: | :----: | 
-| _ezJSON_OBJECT| 1 | 对象 | { } | - |
-| _ezJSON_ARRAY | 2 | 数组 | [ ] | - | 
-| _ezJSON_STRING | 3 | 字符串 | " " | char[] |
-| _ezJSON_NUMBER | 4 | 数字 | 0~9, '.', '-'| float |
-| _ezJSON_BOOL | 5 | 布尔 | false, ture | int |
-| _ezJSON_NULL | 6 | 空 | null | NULL |
-
-以下是类型检测的代码示例：
+<font color=#999AAA >在执行解析动作前，可使用 `_TYPE()` 预先获取键值的类型。以下是类型检测的代码示例：
 ```
   _ezJSON(NULL, jsonStr)
   {

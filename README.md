@@ -61,19 +61,19 @@ MIT License
 #### 基本结构
 <font color=#999AAA >构建字符串时请使用 `ezJSON()` 和 `双括号` 结尾，以下是一个标准的构建结构：
 ```
-  ezJSON ( jsonStr ) 
+  ezJSON(jsonStr) 
   {
-      STR ( key , string );     // 构建字符
-      NUM ( key , number );     // 构建数字
-      STR ( key , keyvalue );   // 构建布尔
-      NUL ( key );              // 构建null
+      STR(key, string);     // 构建字符
+      NUM(key, number);     // 构建数字
+      STR(key, keyvalue);   // 构建布尔
+      NUL(key);             // 构建null
   }}
 ```
 <font color=#999AAA >解析字符串时请使用 `_ezJSON()` 和 `}_END_}` 结尾，`errPtr` 为 _int_ 型变量的指针，以下是一个标准的解析结构：
 ```
   _ezJSON(errPtr, jsonStr) 
   {
-      _VAL ( key , value );     // 字符、数字、布尔动态获取
+      _VAL (key, value);     // 字符、数字、布尔动态获取
       
   }_END_}
 ```

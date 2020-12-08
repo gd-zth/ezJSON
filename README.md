@@ -60,7 +60,7 @@ MIT License
 ### 参数
 <font color=#999AAA >ezJSON 支持以下几种参数类型：
 | 类型 | 宏定义 | 变量类型 |
-| :----: |  :----:  | :----: |
+| :---- |  :----  | :---- |
  | 对象 | _ezJSON_OBJECT | - |
  | 数组 | _ezJSON_ARRAY| - | 
  | 字符串 | _ezJSON_STRING | char[] |

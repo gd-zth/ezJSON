@@ -75,10 +75,10 @@ MIT License
 ```
   ezJSON(jsonStr) 
   {
-      STR(key, string);     // 构建字符
-      NUM(key, number);     // 构建数字
-      STR(key, keyvalue);   // 构建布尔
-      NUL(key);             // 构建null
+      STR(key, "this is a string"); 
+      NUM(key, 23.64);    
+      BOL(key, 1);  
+      NUL(key); 
   }}
 ```
 <font color=#999AAA >解析字符串时请使用 `_ezJSON()` 和 `}_END_}` 结尾，`errPtr` 为 _int_ 型变量的指针，以下是一个标准的解析结构：

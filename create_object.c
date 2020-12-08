@@ -13,9 +13,12 @@ int main(int argc, char *argv[])
             STR("string", "this is object_1 string");
             NUM("number", 23.62);
             BOL("bool", 1);
+            
             OBJ("object_2")
             {
                 STR("string", "this is object_2 string");
+                NUM("number", 23.62);
+                BOL("bool", 1);
             }}
         }}
     }}

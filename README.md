@@ -314,7 +314,8 @@ MIT License
               printf("parse object error\n");
           }
       }}
-  }}
+
+  }_END/_}
 ```
 
 <font color=#999AAA >__`全局检测`__ 启用该检测方式时，当解析函数检测到异常，则自动结束解析项目，并将错误码赋值到 `errPtr` 指向的整数型变量。以下是全局检测的示例代码：
@@ -331,8 +332,9 @@ MIT License
           _VAL("string", string);
           printf("string: %s\n", string);
       }}
-  }}
-  
+
+  }_END/_}
+
   if (0 > err)
       printf("error code %d !\n", err);
 ```
@@ -356,8 +358,8 @@ MIT License
       default:
           printf("parse err !\n");
       }
-  }
-  
+
+  }_END/_}
 ```
 
 ## API
@@ -523,7 +525,8 @@ MIT License
               _VAL("date",    info.student.exp[_IDX].date);
           }}}}
       }}
-  }}
+      
+  }_END/_}
 ```
 
 > 使用ezJSON解析局部：
@@ -536,7 +539,8 @@ MIT License
               _VAL("date",    info.student.exp[_IDX].date);
           }}}}
       }}
-  }}
+      
+  }_END/_}
 ```
 
 ### 结果

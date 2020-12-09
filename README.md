@@ -53,7 +53,7 @@ MIT License
 ### 编译
 <font color=#999AAA >由于整个库只有一个 C 文件和一个头文件，因此您只需将包含副本 __zJSON.c__ 和 __zJSON.h__ 的文件夹复制到项目源,并添加以下内容：
 ```
-#include <ezJSON/ezJSON.h>
+#include "ezJSON/ezJSON.h"
 ```
 
 ### 参数

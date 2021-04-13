@@ -4,10 +4,6 @@
 
 ## 目录
 * [License](#License)
-* [性能测试](#性能测试)
-  * [测试内容](#测试内容)
-  * [测试代码](#测试代码)
-  * [结果](#结果)
 * [使用](#使用)
   * [特性](#特性)
   * [编译](#编译)
@@ -20,6 +16,10 @@
 * [API](#API)
   * [构建相关](#构建相关)
   * [解析相关](#解析相关)
+* [性能测试](#性能测试)
+  * [测试内容](#测试内容)
+  * [测试代码](#测试代码)
+  * [结果](#结果)
 
 
 ## License
@@ -43,144 +43,6 @@ MIT License
 >  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 >  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 >  SOFTWARE.
-
-## 性能测试
-<font color=#999AAA >测试平台使用的是阿里云单核CPU、2G内存的服务器，搭载有64位Ubuntu18.04系统。对目标字符串进行一百万次循环的构建、全部解析和局部解析，分别使用两种库进行5次计时测试。
-
-### 测试内容
-
-> 目标字符串：
-```
-  {
-      "school": "Guangdong University Of Petrochemical Technology",
-      "location": "Maoming",
-      "ranking": 505,
-      "area": 2020.643,
-      "student": {
-          "name": "zhoutianhao",
-          "age": 23,
-          "grades": [
-              97,
-              62,
-              84
-          ],
-          "office": true,
-          "exp": [
-              {
-                  "address": "Guangdong",
-                  "date": 1906
-              },
-              {
-                  "address": "Chengdu",
-                  "date": 1910
-              }
-          ]
-      }
-  }
-```
-
-> 目标结构体：
-```
-  typedef struct INFOSTRUCT
-  {
-      char    school[64];
-      char    location[16];
-      float   ranking;
-      float   area;
-      struct  
-      {
-          char    name[16];
-          float   age;
-          float   grades[3];
-          int     office;
-          struct 
-          {
-              char   address[16];
-              float  date;
-
-          }exp[2];
-
-      }student;
-  
-  }Info;
-```
-
-### 测试代码
-> 使用ezJSON构建：
-```
-  ezJSON(string)
-  {
-      STR("school",   info.school);
-      STR("location", info.location);
-      NUM("ranking",  info.ranking);
-      NUM("area",     info.area);
-      OBJ("student")
-      {
-          STR("name", info.student.name);
-          NUM("age",  info.student.age);
-          ARR("grades", 3)
-          {
-              NUM(NULL, info.student.grades[_IDX]);
-          }}
-          BOL("office", info.student.office);
-          ARR("exp", 2) {OBJ(NULL)
-          {
-              STR("address",  info.student.exp[_IDX].address);
-              NUM("date",     info.student.exp[_IDX].date);
-          }}}}
-      }}
-  }}
-```
-
-> 使用ezJSON解析全部：
-```
-  _ezJSON(NULL, string)
-  {
-      _VAL("school",   info.school);
-      _VAL("location", info.location);
-      _VAL("ranking",  info.ranking);
-      _VAL("area",     info.area);
-      _OBJ("student") 
-      {
-          _VAL("name", info.student.name);
-          _VAL("age",  info.student.age);
-          _ARR("grades")
-          {
-              _VAL(NULL, info.student.grades[_IDX]);
-          }}
-          _VAL("office", info.student.office);
-          _ARR("exp") {_OBJ(NULL)
-          {
-              _VAL("address", info.student.exp[_IDX].address);
-              _VAL("date",    info.student.exp[_IDX].date);
-          }}}}
-      }}
-      
-  }_END/_}
-```
-
-> 使用ezJSON解析局部：
-```
-  _ezJSON(NULL, string)
-  {
-      _OBJ("student") {_ARR("exp") {_OBJ(NULL)
-          {
-              _VAL("address", info.student.exp[_IDX].address);
-              _VAL("date",    info.student.exp[_IDX].date);
-          }}}}
-      }}
-      
-  }_END/_}
-```
-
-### 结果
-<font color=#999AAA >五场测试执行一百万次循环用时（单位：ms）：
-
-| 内容 \ 场| 1 | 2 | 3 | 4 | 5 |
-| :----: | :----: | :----: | :----: | :----: | :----: |
-| 构建全部 | 5385 | 5291 | 5388 |5430 | 5327 |
-| 解析全部 | 10709 |10663 | 10807 |10740 | 10536 |
-| 解析部分 | 5107 |5028 | 5040 |5172 | 5125 |
 
 ## 使用
 ### 特性
@@ -553,4 +415,141 @@ MIT License
 <font color=#999AAA >获取键值类型；返回值大于 __0__ 表示 __类型码__，否则表示 __错误码__；键 `key`，为 __null__ 表示上级为数组；
 > int _TYPE( char* key ) ;
 
+## 性能测试
+<font color=#999AAA >测试平台使用的是阿里云单核CPU、2G内存的服务器，搭载有64位Ubuntu18.04系统。对目标字符串进行一百万次循环的构建、全部解析和局部解析，分别使用两种库进行5次计时测试。
+
+### 测试内容
+
+> 目标字符串：
+```
+  {
+      "school": "Guangdong University Of Petrochemical Technology",
+      "location": "Maoming",
+      "ranking": 505,
+      "area": 2020.643,
+      "student": {
+          "name": "zhoutianhao",
+          "age": 23,
+          "grades": [
+              97,
+              62,
+              84
+          ],
+          "office": true,
+          "exp": [
+              {
+                  "address": "Guangdong",
+                  "date": 1906
+              },
+              {
+                  "address": "Chengdu",
+                  "date": 1910
+              }
+          ]
+      }
+  }
+```
+
+> 目标结构体：
+```
+  typedef struct INFOSTRUCT
+  {
+      char    school[64];
+      char    location[16];
+      float   ranking;
+      float   area;
+      struct  
+      {
+          char    name[16];
+          float   age;
+          float   grades[3];
+          int     office;
+          struct 
+          {
+              char   address[16];
+              float  date;
+
+          }exp[2];
+
+      }student;
+  
+  }Info;
+```
+
+### 测试代码
+> 使用ezJSON构建：
+```
+  ezJSON(string)
+  {
+      STR("school",   info.school);
+      STR("location", info.location);
+      NUM("ranking",  info.ranking);
+      NUM("area",     info.area);
+      OBJ("student")
+      {
+          STR("name", info.student.name);
+          NUM("age",  info.student.age);
+          ARR("grades", 3)
+          {
+              NUM(NULL, info.student.grades[_IDX]);
+          }}
+          BOL("office", info.student.office);
+          ARR("exp", 2) {OBJ(NULL)
+          {
+              STR("address",  info.student.exp[_IDX].address);
+              NUM("date",     info.student.exp[_IDX].date);
+          }}}}
+      }}
+  }}
+```
+
+> 使用ezJSON解析全部：
+```
+  _ezJSON(NULL, string)
+  {
+      _VAL("school",   info.school);
+      _VAL("location", info.location);
+      _VAL("ranking",  info.ranking);
+      _VAL("area",     info.area);
+      _OBJ("student") 
+      {
+          _VAL("name", info.student.name);
+          _VAL("age",  info.student.age);
+          _ARR("grades")
+          {
+              _VAL(NULL, info.student.grades[_IDX]);
+          }}
+          _VAL("office", info.student.office);
+          _ARR("exp") {_OBJ(NULL)
+          {
+              _VAL("address", info.student.exp[_IDX].address);
+              _VAL("date",    info.student.exp[_IDX].date);
+          }}}}
+      }}
+      
+  }_END/_}
+```
+
+> 使用ezJSON解析局部：
+```
+  _ezJSON(NULL, string)
+  {
+      _OBJ("student") {_ARR("exp") {_OBJ(NULL)
+          {
+              _VAL("address", info.student.exp[_IDX].address);
+              _VAL("date",    info.student.exp[_IDX].date);
+          }}}}
+      }}
+      
+  }_END/_}
+```
+
+### 结果
+<font color=#999AAA >五场测试执行一百万次循环用时（单位：ms）：
+
+| 内容 \ 场| 1 | 2 | 3 | 4 | 5 |
+| :----: | :----: | :----: | :----: | :----: | :----: |
+| 构建全部 | 5385 | 5291 | 5388 |5430 | 5327 |
+| 解析全部 | 10709 |10663 | 10807 |10740 | 10536 |
+| 解析部分 | 5107 |5028 | 5040 |5172 | 5125 |
 

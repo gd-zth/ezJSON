@@ -30,7 +30,7 @@
 
 void _ezJsonCreate(char *content)
 {
-    *(content ++) = '{';
+    *(content++) = '{';
     *content = '\0';
 }
 
@@ -38,7 +38,7 @@ void _ezJsonCreateEnd(char *content)
 {
     content += strlen(content) - 1;
 
-    *(content ++) = '}';
+    *(content++) = '}';
     *content = '\0';
 }
 
@@ -46,20 +46,21 @@ void _ezJsonPostObject(char *content, char *key)
 {
     content += strlen(content);
 
-    if (NULL != key) {
+    if (NULL != key)
+    {
         int idx;
 
-        *(content ++) = '\"';
+        *(content++) = '\"';
 
         int sizeKey = strlen(key);
-        for(idx = 0; idx < sizeKey; idx ++)
-            *(content ++) = *(key + idx);
+        for (idx = 0; idx < sizeKey; idx++)
+            *(content++) = *(key + idx);
 
-        *(content ++) = '\"';
-        *(content ++) = ':';
+        *(content++) = '\"';
+        *(content++) = ':';
     }
 
-    *(content ++) = '{';
+    *(content++) = '{';
     *content = '\0';
 }
 
@@ -68,10 +69,10 @@ void _ezJsonPostObjectEnd(char *content)
     content += strlen(content) - 1;
 
     if (',' != *content)
-        content ++;
+        content++;
 
-    *(content ++) = '}';
-    *(content ++) = ',';
+    *(content++) = '}';
+    *(content++) = ',';
     *content = '\0';
 }
 
@@ -81,16 +82,17 @@ void _ezJsonPostArray(char *content, char *key)
 
     content += strlen(content);
 
-    if (NULL != key) {
-    *(content ++) = '\"';
+    if (NULL != key)
+    {
+        *(content++) = '\"';
         int sizeKey = strlen(key);
-        for(idx = 0; idx < sizeKey; idx ++)
-            *(content ++) = *(key + idx);
-        *(content ++) = '\"';
-        *(content ++) = ':';
+        for (idx = 0; idx < sizeKey; idx++)
+            *(content++) = *(key + idx);
+        *(content++) = '\"';
+        *(content++) = ':';
     }
 
-    *(content ++) = '[';
+    *(content++) = '[';
     *content = '\0';
 }
 
@@ -99,10 +101,10 @@ void _ezJsonPostArrayEnd(char *content)
     content += strlen(content) - 1;
 
     if (',' != *content)
-        content ++;
+        content++;
 
-    *(content ++) = ']';
-    *(content ++) = ',';
+    *(content++) = ']';
+    *(content++) = ',';
     *content = '\0';
 }
 
@@ -112,40 +114,61 @@ void _ezJsonPostString(char *content, char *key, char *value)
 
     content += strlen(content);
 
-    if (NULL != key) {
-        *(content ++) = '\"';
+    if (NULL != key)
+    {
+        *(content++) = '\"';
 
         int sizeKey = strlen(key);
-        for(idx = 0; idx < sizeKey; idx ++)
-            *(content ++) = *(key + idx);
+        for (idx = 0; idx < sizeKey; idx++)
+            *(content++) = *(key + idx);
 
-        *(content ++) = '\"';
-        *(content ++) = ':';
+        *(content++) = '\"';
+        *(content++) = ':';
     }
 
-    *(content ++) = '\"';
+    *(content++) = '\"';
 
     int sizeValue = strlen(value);
-    for(idx = 0; idx < sizeValue; idx ++) {
-        if (32 > *(value + idx) || '\\' == *(value + idx) || '\"' == *(value + idx)) {
-            *(content ++) = '\\';
-            switch (*(value + idx)) {
-                case '\\':  *(content ++) = '\\';   break;
-                case '\"':  *(content ++) = '\"';   break;
-                case '\b':  *(content ++) = 'b';    break;
-                case '\f':  *(content ++) = 'f';    break;
-                case '\n':  *(content ++) = 'n';    break;
-                case '\r':  *(content ++) = 'r';    break;
-                case '\t':  *(content ++) = 't';    break;
-                default:    *(content ++) = '?';
+    for (idx = 0; idx < sizeValue; idx++)
+    {
+        if (32 > *(value + idx) || '\\' == *(value + idx) || '\"' == *(value + idx))
+        {
+            *(content++) = '\\';
+            switch (*(value + idx))
+            {
+            case '\\':
+                *(content++) = '\\';
+                break;
+            case '\"':
+                *(content++) = '\"';
+                break;
+            case '\b':
+                *(content++) = 'b';
+                break;
+            case '\f':
+                *(content++) = 'f';
+                break;
+            case '\n':
+                *(content++) = 'n';
+                break;
+            case '\r':
+                *(content++) = 'r';
+                break;
+            case '\t':
+                *(content++) = 't';
+                break;
+            default:
+                *(content++) = '?';
             }
-        } else {
-            *(content ++) = *(value + idx);
+        }
+        else
+        {
+            *(content++) = *(value + idx);
         }
     }
 
-    *(content ++) = '\"';
-    *(content ++) = ',';
+    *(content++) = '\"';
+    *(content++) = ',';
     *content = '\0';
 }
 
@@ -157,12 +180,16 @@ void _ezJsonPostNumber(char *content, char *key, double value)
     sprintf(_value, "%lf", value);
 
     int sizeValue = strlen(_value);
-    for (idx = sizeValue - 1; idx >= 0; idx --) {
-        if ('.' == *(_value + idx)) {
-            for (idx = sizeValue - 1; idx >= 0; idx --) {
+    for (idx = sizeValue - 1; idx >= 0; idx--)
+    {
+        if ('.' == *(_value + idx))
+        {
+            for (idx = sizeValue - 1; idx >= 0; idx--)
+            {
                 if ('0' == *(_value + idx))
                     *(_value + idx) = '\0';
-                else {
+                else
+                {
                     if ('.' == *(_value + idx))
                         *(_value + idx) = '\0';
                     break;
@@ -174,22 +201,23 @@ void _ezJsonPostNumber(char *content, char *key, double value)
 
     content += strlen(content);
 
-    if (NULL != key) {
-        *(content ++) = '\"';
+    if (NULL != key)
+    {
+        *(content++) = '\"';
 
         int sizeKey = strlen(key);
-        for(idx = 0; idx < sizeKey; idx ++)
-            *(content ++) = *(key + idx);
+        for (idx = 0; idx < sizeKey; idx++)
+            *(content++) = *(key + idx);
 
-        *(content ++) = '\"';
-        *(content ++) = ':';
+        *(content++) = '\"';
+        *(content++) = ':';
     }
 
     sizeValue = strlen(_value);
-    for(idx = 0; idx < sizeValue; idx ++)
-        *(content ++) = *(_value + idx);
-    
-    *(content ++) = ',';
+    for (idx = 0; idx < sizeValue; idx++)
+        *(content++) = *(_value + idx);
+
+    *(content++) = ',';
     *content = '\0';
 }
 
@@ -197,33 +225,38 @@ void _ezJsonPostBool(char *content, char *key, int value)
 {
     content += strlen(content);
 
-    if (NULL != key) {
+    if (NULL != key)
+    {
         int idx;
 
-        *(content ++) = '\"';
+        *(content++) = '\"';
 
-        size_t sizeKey = strlen(key);
-        for (idx = 0; idx < sizeKey; idx ++) {
-            *(content ++) = *(key + idx);
+        int sizeKey = strlen(key);
+        for (idx = 0; idx < sizeKey; idx++)
+        {
+            *(content++) = *(key + idx);
         }
 
-        *(content ++) = '\"';
-        *(content ++) = ':';
+        *(content++) = '\"';
+        *(content++) = ':';
     }
 
-    if (0 == value) {
-        *(content ++) = 'f';
-        *(content ++) = 'a';
-        *(content ++) = 'l';
-        *(content ++) = 's';
-    } else {
-        *(content ++) = 't';
-        *(content ++) = 'r';
-        *(content ++) = 'u';
+    if (0 == value)
+    {
+        *(content++) = 'f';
+        *(content++) = 'a';
+        *(content++) = 'l';
+        *(content++) = 's';
+    }
+    else
+    {
+        *(content++) = 't';
+        *(content++) = 'r';
+        *(content++) = 'u';
     }
 
-    *(content ++) = 'e';
-    *(content ++) = ',';
+    *(content++) = 'e';
+    *(content++) = ',';
     *content = '\0';
 }
 
@@ -233,66 +266,70 @@ void _ezJsonPostNull(char *content, char *key)
 
     content += strlen(content);
 
-    *(content ++) = '\"';
+    *(content++) = '\"';
 
-    size_t sizeKey = strlen(key);
-    for (idx = 0; idx < sizeKey; idx ++) {
-        *(content ++) = *(key + idx);
+    int sizeKey = strlen(key);
+    for (idx = 0; idx < sizeKey; idx++)
+    {
+        *(content++) = *(key + idx);
     }
 
-    *(content ++) = '\"';
-    *(content ++) = ':';
-    *(content ++) = 'n';
-    *(content ++) = 'u';
-    *(content ++) = 'l';
-    *(content ++) = 'l';
-    *(content ++) = ',';
+    *(content++) = '\"';
+    *(content++) = ':';
+    *(content++) = 'n';
+    *(content++) = 'u';
+    *(content++) = 'l';
+    *(content++) = 'l';
+    *(content++) = ',';
     *content = '\0';
 }
 
 void _ezJsonClear(char *content)
 {
     int _doubleQuotes = 1;
-	int idx = 0;
+    int idx = 0;
 
-	char *point = content;
+    char *point = content;
 
-	while(*point) {
-        switch (*point) {
+    while (*point)
+    {
+        switch (*point)
+        {
         case ' ':
         case '\t':
         case '\r':
         case '\n':
         {
             if (0 > _doubleQuotes)
-                content[idx ++] = *point;
+                content[idx++] = *point;
         }
-            break;
+        break;
         case '\"':
         {
             int _existSlash = 1;
             char *_point = point - 1;
 
-            while(content <= _point && '\\' == *_point) {
+            while (content <= _point && '\\' == *_point)
+            {
                 _existSlash = -_existSlash;
-                _point --;
+                _point--;
             }
 
             if (0 < _existSlash)
                 _doubleQuotes = -_doubleQuotes;
 
-            content[idx ++] = *point;
+            content[idx++] = *point;
         }
-            break;
+        break;
         default:
-            content[idx ++] = *point;
+            content[idx++] = *point;
             break;
         }
 
-		point ++;
-	}
+        point++;
+    }
 
-	content[idx] = '\0';
+    content[idx] = '\0';
 }
 
 int _ezJsonErr(int err)
@@ -306,8 +343,10 @@ static char *__ezJsonGetValueStart(char *content, int *err)
 
     char *endPtr = content + strlen(content);
 
-    for( ;'\0' != *content && content < endPtr; content ++) {
-        switch (*content) {
+    for (; '\0' != *content && content < endPtr; content++)
+    {
+        switch (*content)
+        {
         case ' ':
         case '\b':
         case '\f':
@@ -325,20 +364,20 @@ static char *__ezJsonGetValueStart(char *content, int *err)
         case '-':
         case ']':
         {
-            goto END;
+            return content;
         }
-            break;
+        break;
         default:
         {
             if (0x30 > *content || 0x39 < *content)
                 *err = ezJSON_ERR_FORMAT;
 
-            goto END;
+            return content;
         }
-            break;
+        break;
         }
     }
-END:
+
     return content;
 }
 
@@ -352,57 +391,64 @@ static char *__ezJsonGetTargetStart(char *content, int *err, char *key)
     char *_object;
     char *_point;
 
-    size_t sizeKey = strlen(key);
+    int sizeKey = strlen(key);
     char *endPtr = content + strlen(content);
 
 FIND:
     _object = strstr(content, key);
 
-    if (NULL == _object) {
+    if (NULL == _object)
+    {
         *err = ezJSON_ERR_NOTEXIST;
-        goto END;
+        return content;
     }
 
     _point = content;
 
-    for ( ; _point < _object + sizeKey && '\0' != *_point && endPtr > _point; _point ++) {
-        switch (*_point) {
+    for (; _point < _object + sizeKey && '\0' != *_point && endPtr > _point; _point++)
+    {
+        switch (*_point)
+        {
         case '{':
         case '[':
         {
-            if (0 < _doubleQuotes) 
-                _curlyBraces ++;
+            if (0 < _doubleQuotes)
+                _curlyBraces++;
         }
-            break;
+        break;
         case ']':
         case '}':
         {
-            if (0 < _doubleQuotes) 
-                _curlyBraces --;
+            if (0 < _doubleQuotes)
+                _curlyBraces--;
         }
-            break;
+        break;
         case '\"':
         {
             int _existSlash = 1;
             char *__point = _point - 1;
 
-            while(content <= __point && '\\' == *__point) {
+            while (content <= __point && '\\' == *__point)
+            {
                 _existSlash = -_existSlash;
-                __point --;
+                __point--;
             }
 
             if (0 < _existSlash)
                 _doubleQuotes = -_doubleQuotes;
         }
-            break;
+        break;
         }
     }
 
     content = _object + sizeKey;
 
-    if ('\"' == *(_object-1) && '\"' == *content) {
-        for(content ++; '\0' != *content && content < endPtr; content ++) {
-            switch(*content) {
+    if ('\"' == *(_object - 1) && '\"' == *content)
+    {
+        for (content++; '\0' != *content && content < endPtr; content++)
+        {
+            switch (*content)
+            {
             case ' ':
                 break;
             default:
@@ -413,17 +459,17 @@ FIND:
                 content = _object + sizeKey;
                 goto FIND;
             }
-                break;
+            break;
             }
         }
     NEXT:
         content = __ezJsonGetValueStart(content + 1, err);
         if (0 > *err)
-            goto END;
-    } else
+            return content;
+    }
+    else
         goto FIND;
 
-END:
     return content;
 }
 
@@ -435,60 +481,63 @@ static char *__ezJsonGetTargetStop(char *content, int *err, int *type)
     char *_point = content;
     char *endPtr = content + strlen(content);
 
-    switch(*_point) {
+    switch (*_point)
+    {
     case '0':
     case '1':
-    case '2': 
-    case '3': 
-    case '4': 
+    case '2':
+    case '3':
+    case '4':
     case '5':
-    case '6': 
-    case '7': 
-    case '8': 
-    case '9': 
+    case '6':
+    case '7':
+    case '8':
+    case '9':
     case '.':
     case '-':
     {
         *type = ezJSON_NUMBER;
 
-        for( ; '\0' != *_point && endPtr > _point; _point ++) {
-            if ('.' != *_point && ('0' > *_point || '9' < *_point)) {
+        for (; '\0' != *_point && endPtr > _point; _point++)
+        {
+            if ('.' != *_point && ('0' > *_point || '9' < *_point))
+            {
                 revalue = _point;
-                goto END;
+                return revalue;
             }
         }
 
         *err = ezJSON_ERR_FORMAT;
-        goto END;
+        return revalue;
     }
-        break;
+    break;
     case 't':
     case 'f':
     {
         *type = ezJSON_BOOL;
 
-        if (*_point == 't' && *(_point+1) == 'r' &&*(_point+2) == 'u' &&*(_point+3) == 'e')
+        if (*_point == 't' && *(_point + 1) == 'r' && *(_point + 2) == 'u' && *(_point + 3) == 'e')
             revalue = _point + 4;
-        else if (*_point == 'f' && *(_point+1) == 'a' && *(_point+2) == 'l' && *(_point+3) == 's' && *(_point+4) == 'e')
+        else if (*_point == 'f' && *(_point + 1) == 'a' && *(_point + 2) == 'l' && *(_point + 3) == 's' && *(_point + 4) == 'e')
             revalue = _point + 5;
         else
             *err = ezJSON_ERR_FORMAT;
 
-        goto END;
+        return revalue;
     }
-        break;
+    break;
     case 'n':
     {
         *type = ezJSON_NULL;
 
-        if (*_point == 'n' && *(_point+1) == 'u' &&*(_point+2) == 'l' &&*(_point+3) == 'l')
+        if (*_point == 'n' && *(_point + 1) == 'u' && *(_point + 2) == 'l' && *(_point + 3) == 'l')
             revalue = _point + 4;
         else
             *err = ezJSON_ERR_FORMAT;
 
-        goto END;
+        return revalue;
     }
-        break;
+    break;
     case '{':
     {
         *type = ezJSON_OBJECT;
@@ -496,46 +545,50 @@ static char *__ezJsonGetTargetStop(char *content, int *err, int *type)
         int _existBraces = 1;
         int _doubleQuotes = 1;
 
-        for( _point ++ ; '\0' != *_point && endPtr > _point; _point ++) {
-            switch(*_point) {
+        for (_point++; '\0' != *_point && endPtr > _point; _point++)
+        {
+            switch (*_point)
+            {
             case '{':
             {
                 if (0 < _doubleQuotes)
-                    _existBraces ++;
+                    _existBraces++;
             }
-                break;
+            break;
             case '}':
             {
                 if (0 < _doubleQuotes)
-                    _existBraces --;
+                    _existBraces--;
             }
-                break;
+            break;
             case '\"':
             {
                 int _existSlash = 1;
                 char *__point = _point - 1;
 
-                while(content <= __point && '\\' == *__point) {
+                while (content <= __point && '\\' == *__point)
+                {
                     _existSlash = -_existSlash;
-                    __point --;
+                    __point--;
                 }
 
                 if (0 < _existSlash)
                     _doubleQuotes = -_doubleQuotes;
             }
-                break;
+            break;
             }
 
-            if (1 > _existBraces) {
+            if (1 > _existBraces)
+            {
                 revalue = _point + 1;
-                goto END;
+                return revalue;
             }
         }
 
         *err = ezJSON_ERR_FORMAT;
-        goto END;
+        return revalue;
     }
-        break;
+    break;
     case '[':
     {
         *type = ezJSON_ARRAY;
@@ -543,77 +596,84 @@ static char *__ezJsonGetTargetStop(char *content, int *err, int *type)
         int _existBraces = 1;
         int _doubleQuotes = 1;
 
-        for( _point ++; '\0' != *_point && endPtr > _point; _point ++) {
-            switch(*_point) {
+        for (_point++; '\0' != *_point && endPtr > _point; _point++)
+        {
+            switch (*_point)
+            {
             case '[':
             {
-                if (0 < _doubleQuotes) 
-                    _existBraces ++;
+                if (0 < _doubleQuotes)
+                    _existBraces++;
             }
-                break;        
+            break;
             case ']':
             {
-                if (0 < _doubleQuotes) 
-                    _existBraces --;
+                if (0 < _doubleQuotes)
+                    _existBraces--;
             }
-                break;
+            break;
             case '\"':
             {
                 int _existSlash = 1;
                 char *__point = _point - 1;
 
-                while(content <= __point && '\\' == *__point) {
+                while (content <= __point && '\\' == *__point)
+                {
                     _existSlash = -_existSlash;
-                    __point --;
+                    __point--;
                 }
 
                 if (0 < _existSlash)
                     _doubleQuotes = -_doubleQuotes;
             }
-                break;
+            break;
             }
 
-            if (1 > _existBraces) {
+            if (1 > _existBraces)
+            {
                 revalue = _point + 1;
-                goto END;
+                return revalue;
             }
         }
 
         *err = ezJSON_ERR_FORMAT;
-        goto END;
+        return revalue;
     }
-        break;
+    break;
     case '\"':
     {
         *type = ezJSON_STRING;
 
-        for( _point ++ ; '\0' != *_point; _point ++) {
-            if ('\"' == *_point) {
+        for (_point++; '\0' != *_point; _point++)
+        {
+            if ('\"' == *_point)
+            {
                 int _existSlash = 1;
                 char *__point = _point - 1;
 
-                while(content <= __point && '\\' == *__point) {
+                while (content <= __point && '\\' == *__point)
+                {
                     _existSlash = -_existSlash;
-                    __point --;
+                    __point--;
                 }
 
-                if (0 < _existSlash) {
+                if (0 < _existSlash)
+                {
                     revalue = _point + 1;
-                    goto END;
+                    return revalue;
                 }
             }
         }
 
         *err = ezJSON_ERR_FORMAT;
-        goto END;
+        return revalue;
     }
-        break;
+    break;
     default:
         *err = ezJSON_ERR_SYMBOL;
-        goto END;
+        return revalue;
     }
 
-END:
     return revalue;
 }
 
@@ -624,20 +684,22 @@ int _ezJsonGetType(char *content, int *err, char *key)
     int revalue = 0;
     char *begin = content;
 
-    if (NULL != key) {
+    if (NULL != key)
+    {
         begin = __ezJsonGetTargetStart(content, err, key);
-        if (0 > *err) {
+        if (0 > *err)
+        {
             revalue = *err;
-            goto END;
+            return revalue;
         }
-    } else
+    }
+    else
         revalue = ezJSON_ERR_NONE;
 
     __ezJsonGetTargetStop(begin, err, &revalue);
     if (0 > *err)
         revalue = *err;
 
-END:
     return revalue;
 }
 
@@ -648,26 +710,28 @@ char *_ezJsonGetObject(char *content, int *err, char *key)
     char *revalue = content;
     char *begin = content;
 
-    if (NULL != key) {
+    if (NULL != key)
+    {
         begin = __ezJsonGetTargetStart(content, err, key);
         if (0 > *err)
-            goto END;
+            return revalue;
 
         revalue = begin;
-    } else {
+    }
+    else
+    {
         begin = __ezJsonGetValueStart(begin, err);
         if (0 > *err)
-            goto END;
+            return revalue;
 
         int type;
         char *end = __ezJsonGetTargetStop(begin, err, &type);
         if (0 > *err)
-            goto END;
+            return revalue;
 
         revalue = end + 1;
     }
 
-END:
     return revalue;
 }
 
@@ -685,13 +749,14 @@ char *_ezJsonGetArray(char **content, int *err, int *size, char *key)
         begin = __ezJsonGetValueStart(*content, err);
 
     int type;
-    char *end = __ezJsonGetTargetStop(begin, err, &type);
+    __ezJsonGetTargetStop(begin, err, &type);
     if (0 > *err)
-        goto END;
+        return revalue;
 
-    if (ezJSON_ARRAY != type) {
+    if (ezJSON_ARRAY != type)
+    {
         *err = ezJSON_ERR_FORMAT;
-        goto END;
+        return revalue;
     }
 
     int _existComma = 0;
@@ -699,42 +764,45 @@ char *_ezJsonGetArray(char **content, int *err, int *size, char *key)
     int _curlyBraces = 0;
     char *_point = begin;
 
-    for (; '\0' != *_point && endPtr > _point && (']' != *(_point-1) || 0 != _curlyBraces); _point ++) {
-        switch(*_point) {
+    for (; '\0' != *_point && endPtr > _point && (']' != *(_point - 1) || 0 != _curlyBraces); _point++)
+    {
+        switch (*_point)
+        {
         case ',':
         {
             if (0 < _doubleQuotes && 1 == _curlyBraces)
-                _existComma ++;
+                _existComma++;
         }
-            break;
+        break;
         case '{':
         case '[':
         {
-            if (0 < _doubleQuotes) 
-                _curlyBraces ++;
+            if (0 < _doubleQuotes)
+                _curlyBraces++;
         }
-            break;
+        break;
         case ']':
         case '}':
         {
             if (0 < _doubleQuotes)
-                _curlyBraces --;
+                _curlyBraces--;
         }
-            break;
+        break;
         case '\"':
         {
             int _existSlash = 1;
             char *__point = _point - 1;
 
-            while(*content <= __point && '\\' == *__point) {
+            while (*content <= __point && '\\' == *__point)
+            {
                 _existSlash = -_existSlash;
-                __point --;
+                __point--;
             }
 
             if (0 < _existSlash)
                 _doubleQuotes = -_doubleQuotes;
         }
-            break;
+        break;
         }
     }
 
@@ -748,7 +816,6 @@ char *_ezJsonGetArray(char **content, int *err, int *size, char *key)
 
     *content = begin + 1;
 
-END:
     return revalue;
 }
 
@@ -759,31 +826,34 @@ char *_ezJsonGetValue(char *content, int *err, char *key, void *value)
     char *revalue = content;
     char *begin = content;
 
-    if (NULL != key) {
+    if (NULL != key)
+    {
         begin = __ezJsonGetTargetStart(content, err, key);
         if (0 > *err)
-            goto END;
+            return revalue;
     }
     begin = __ezJsonGetValueStart(begin, err);
     if (0 > *err)
-        goto END;
+        return revalue;
 
     int type;
     char *end = __ezJsonGetTargetStop(begin, err, &type);
     if (0 > *err)
-        goto END;
+        return revalue;
 
-    if (NULL == key) {
+    if (NULL == key)
+    {
         revalue = __ezJsonGetValueStart(end, err);
         if (0 > *err)
-            goto END;
+            return revalue;
     }
 
-    switch(type) {
+    switch (type)
+    {
     case ezJSON_NULL:
     {
     }
-        break;
+    break;
     case ezJSON_BOOL:
     {
         if ('t' == *begin)
@@ -791,47 +861,62 @@ char *_ezJsonGetValue(char *content, int *err, char *key, void *value)
         else
             *((int *)value) = 0;
     }
-        break;
+    break;
     case ezJSON_NUMBER:
     {
         char _value[16];
 
-        sprintf(_value, "%.*s", (int)(end-begin), begin);
+        sprintf(_value, "%.*s", (int)(end - begin), begin);
         *((float *)value) = atof(_value);
     }
-        break;
+    break;
     case ezJSON_STRING:
     {
         char *_value = (char *)value;
         char *_point = begin + 1;
 
-        size_t idx;
-        for(idx = 0; idx < end - begin - 2; idx ++) {
-            if ('\\' == _point[idx]) {
-                switch(_point[++ idx]) {
+        int idx;
+        for (idx = 0; idx < end - begin - 2; idx++)
+        {
+            if ('\\' == _point[idx])
+            {
+                switch (_point[++idx])
+                {
                 case '\\':
                 case '\"':
-                case '/':   *(_value ++) = _point[idx]; break;
-                case 'b':   *(_value ++) = '\b';        break;
-                case 'f':   *(_value ++) = '\f';        break;
-                case 'n':   *(_value ++) = '\n';        break;
-                case 'r':   *(_value ++) = '\r';        break;
-                case 't':   *(_value ++) = '\t';        break;
+                case '/':
+                    *(_value++) = _point[idx];
+                    break;
+                case 'b':
+                    *(_value++) = '\b';
+                    break;
+                case 'f':
+                    *(_value++) = '\f';
+                    break;
+                case 'n':
+                    *(_value++) = '\n';
+                    break;
+                case 'r':
+                    *(_value++) = '\r';
+                    break;
+                case 't':
+                    *(_value++) = '\t';
+                    break;
                 default:
                     *err = ezJSON_ERR_FORMAT;
-                    goto END;
+                    return revalue;
                 }
-            } else
-                *(_value ++) = _point[idx];
+            }
+            else
+                *(_value++) = _point[idx];
         }
 
         *_value = '\0';
     }
-        break;
+    break;
     }
 
     *err = type;
 
-END:
     return revalue;
 }

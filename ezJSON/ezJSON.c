@@ -97,7 +97,7 @@ void _ezJsonPostArray(char *content, char *key)
 }
 
 void _ezJsonPostArrayEnd(char *content)
-{
+{ 
     content += strlen(content) - 1;
 
     if (',' != *content)

@@ -759,6 +759,7 @@ char *_ezJsonGetArray(char **content, int *err, int *size, char *key)
         return revalue;
     }
 
+    int _existCnt = 0;
     int _existComma = 0;
     int _doubleQuotes = 1;
     int _curlyBraces = 0;
@@ -803,12 +804,19 @@ char *_ezJsonGetArray(char **content, int *err, int *size, char *key)
                 _doubleQuotes = -_doubleQuotes;
         }
         break;
+        case ' ':
+        case '\t':
+        case '\r':
+        case '\n':
+            break;
+        default:
+            _existCnt = 1;
         }
     }
 
     *size = _existComma + 1;
 
-    if (0 == _existComma)
+    if (0 == _existComma && 0 == _existCnt)
         *size = 0;
 
     if (NULL == key)
@@ -915,8 +923,6 @@ char *_ezJsonGetValue(char *content, int *err, char *key, void *value)
     }
     break;
     }
-
-    *err = type;
 
     return revalue;
 }
